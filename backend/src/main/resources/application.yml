@@ -1,0 +1,30 @@
+server:
+  port: 8090
+
+debug: true
+
+# Hibernate ddl auto (create, create-drop, validate, update)
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+#optimization for batching to group statements and send it in one
+    properties:
+      hibernate:
+        order_inserts: true
+        order_updates: true
+        # The SQL dialect makes Hibernate generate better SQL for the chosen database
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+  datasource:
+    url: jdbc:postgresql://localhost:5432/diploma
+    username: auth
+    password: auth
+  http:
+    log-request-details: true
+  liquibase:
+    change-log: classpath:db/liquibase/db.changelog-master.yaml
+
+date:
+  pattern: yyyy-MM-dd
