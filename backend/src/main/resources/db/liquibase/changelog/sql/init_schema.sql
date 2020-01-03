@@ -33,9 +33,11 @@ CREATE TYPE pr_relation_type as ENUM (
 
 CREATE TABLE pr_user
 (
-    user_id  SERIAL PRIMARY KEY,
-    username VARCHAR(100),
-    password VARCHAR(100)
+    user_id    SERIAL PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name  VARCHAR(100) NOT NULL,
+    username   VARCHAR(100) NOT NULL,
+    password   VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE pr_role
