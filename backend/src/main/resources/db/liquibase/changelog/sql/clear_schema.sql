@@ -9,3 +9,8 @@ DO $$
         EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(tabnames.tablename) || ' CASCADE';
     END LOOP;
 END $$;
+
+DROP TYPE IF EXISTS pr_priority;
+DROP TYPE IF EXISTS pr_ticket_type;
+DROP TYPE IF EXISTS pr_resolution;
+DROP TYPE IF EXISTS pr_relation_type;
