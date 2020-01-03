@@ -20,7 +20,7 @@ CREATE TYPE pr_resolution as ENUM (
     'NOT A BUG',
     'KNOWN ISSUE',
     'DUPLICATE',
-    'CAN NOT REPRODUCE',
+    'CANNOT REPRODUCE',
     'CANCELED'
     );
 
