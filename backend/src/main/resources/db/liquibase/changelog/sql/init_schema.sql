@@ -76,7 +76,7 @@ CREATE TABLE pr_ticket_relation
 (
     relation_id   SERIAL PRIMARY KEY,
     source_id     INTEGER          NOT NULL,
-    related_id    INTEGER          NOT NULL,
+    target_id    INTEGER          NOT NULL,
     relation_type pr_relation_type NOT NULL,
 
     created_by    VARCHAR(255),
@@ -122,7 +122,7 @@ ALTER TABLE ONLY pr_ticket
 ALTER TABLE ONLY pr_ticket_relation
     ADD CONSTRAINT fk_pr_ticket_relation_source FOREIGN KEY (source_id) REFERENCES pr_ticket (ticket_id);
 ALTER TABLE ONLY pr_ticket_relation
-    ADD CONSTRAINT fk_pr_ticket_relation_related FOREIGN KEY (related_id) REFERENCES pr_ticket (ticket_id);
+    ADD CONSTRAINT fk_pr_ticket_relation_related FOREIGN KEY (target_id) REFERENCES pr_ticket (ticket_id);
 
 ALTER TABLE ONLY pr_label
     ADD CONSTRAINT fk_pr_label_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id);

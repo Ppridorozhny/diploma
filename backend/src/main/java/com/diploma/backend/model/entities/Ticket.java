@@ -13,6 +13,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -68,4 +69,7 @@ public class Ticket extends BaseAuditEntity {
     @CollectionTable(name = "pr_label", joinColumns = @JoinColumn(name = "label_id"))
     @Column(name = "name")
     private List<String> label;
+
+    @OneToMany(mappedBy = "source")
+    private Set<TicketRelation> relations;
 }
