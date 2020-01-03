@@ -41,6 +41,7 @@ public class Ticket extends BaseAuditEntity {
 
     @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name = "type", updatable = false, nullable = false)
     private TicketType type;
 
     @NotNull
@@ -56,7 +57,7 @@ public class Ticket extends BaseAuditEntity {
     private User assignee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reporter_id", nullable = false)
+    @JoinColumn(name = "reporter_id", nullable = false, updatable = false)
     @NotNull
     @EqualsAndHashCode.Exclude
     private User reporter;
@@ -75,4 +76,6 @@ public class Ticket extends BaseAuditEntity {
     @OneToMany(mappedBy = "source")
     @EqualsAndHashCode.Exclude
     private Set<TicketRelation> relations;
+
+    //todo add component
 }
