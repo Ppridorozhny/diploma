@@ -8,30 +8,26 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "pr_role")
+@Table(name = "pr_comment")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Role extends BaseEntity {
+public class Comment extends BaseAuditEntity {
 
     @Id
-    @Column(name = "role_id", updatable = false)
+    @Column(name = "comment_id", updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotNull
     @Length(max = 100)
-    private String name;
+    private String text;
 
-    @OneToMany
-    @JoinTable(name = "pr_user_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ticket_id", nullable = false)
     @EqualsAndHashCode.Exclude
-    private Set<Role> roles;
+    private Ticket ticket;
 }

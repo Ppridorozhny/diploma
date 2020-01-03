@@ -89,7 +89,7 @@ CREATE TABLE pr_ticket_relation
 
 CREATE TABLE pr_label
 (
-    label_id  BIGSERIAL PRIMARY KEY,
+    label_id  SERIAL PRIMARY KEY,
     name      VARCHAR(255) NOT NULL,
     ticket_id INTEGER
 );
@@ -98,7 +98,7 @@ CREATE TABLE pr_comment
 (
     comment_id    BIGSERIAL PRIMARY KEY,
     text          VARCHAR(512) NOT NULL,
-    ticket_id     INTEGER,
+    ticket_id     INTEGER NOT NULL,
 
     created_by    VARCHAR(255),
     created_when  TIMESTAMP,

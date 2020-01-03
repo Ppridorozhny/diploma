@@ -16,7 +16,8 @@ import java.util.Set;
 @Table(name = "pr_user")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@EqualsAndHashCode(callSuper = true)
+public class User extends BaseEntity {
 
     @Id
     @Column(name = "user_id", updatable = false)
