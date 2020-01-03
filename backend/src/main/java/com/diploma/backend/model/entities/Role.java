@@ -33,5 +33,5 @@ public class Role extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     @EqualsAndHashCode.Exclude
-    private Set<Role> roles;
+    private Set<User> roles;
 }
