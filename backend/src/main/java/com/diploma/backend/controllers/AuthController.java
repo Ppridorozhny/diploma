@@ -34,7 +34,7 @@ import java.net.URI;
 @Api(tags = {"AuthController"})
 @Validated
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthController {
 

@@ -18,7 +18,7 @@ import java.util.List;
 @Api(tags = {"TicketController"})
 @Validated
 @RestController
-@RequestMapping("/tickets")
+@RequestMapping("/api/tickets")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class TicketController {

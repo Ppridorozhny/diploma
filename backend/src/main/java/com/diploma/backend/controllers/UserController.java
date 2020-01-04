@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = {"UserController"})
 @Validated
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class UserController {
