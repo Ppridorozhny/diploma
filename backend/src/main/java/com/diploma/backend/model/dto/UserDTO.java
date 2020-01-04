@@ -1,6 +1,8 @@
 package com.diploma.backend.model.dto;
 
 import com.diploma.backend.validation.Groups;
+import com.diploma.backend.validation.UniqueEmailConstraint;
+import com.diploma.backend.validation.UniqueUsernameConstraint;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -29,11 +31,13 @@ public class UserDTO {
     @NotBlank
     @Pattern(regexp = "^[_.@A-Za-z0-9-]*$")
     @Length(max = 100)
+    @UniqueUsernameConstraint
     private String username;
 
     @Email
     @NotBlank
     @Length(max = 100)
+    @UniqueEmailConstraint(groups = {Groups.CREATE.class})
     private String email;
 
     @NotNull

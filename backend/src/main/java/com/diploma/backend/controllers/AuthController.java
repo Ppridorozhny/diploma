@@ -8,13 +8,13 @@ import com.diploma.backend.model.entities.User;
 import com.diploma.backend.repository.UserRepository;
 import com.diploma.backend.security.JwtTokenProvider;
 import com.diploma.backend.service.UserService;
+import com.diploma.backend.validation.Groups;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 
 @Slf4j
@@ -46,7 +45,7 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody UserLoginDTO loginRequest) {
+    public ResponseEntity<?> authenticateUser(@Validated @RequestBody UserLoginDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -62,22 +61,11 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO userDTO) {
-        if (userRepository.existsByUsername(userDTO.getUsername())) {
-            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        if (userRepository.existsByEmail(userDTO.getEmail())) {
-            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
-                    HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<ApiResponse> registerUser(@Validated(Groups.CREATE.class) @RequestBody UserDTO userDTO) {
 
         // Creating user's account
         User user = conversionService.convert(userDTO, User.class);
-
         User result = userService.createUser(user);
-
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath().path("/users/{username}")
