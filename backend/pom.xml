@@ -13,9 +13,10 @@
 	<description>Diploma project with Spring Boot</description>
 
 	<properties>
-		<model.mapper.version>2.3.0</model.mapper.version>
-		<swagger.version>2.9.2</swagger.version>
-	</properties>
+        <model.mapper.version>2.3.0</model.mapper.version>
+        <swagger.version>2.9.2</swagger.version>
+        <jwt.version>0.9.1</jwt.version>
+    </properties>
 
 	<dependencies>
 		<dependency>
@@ -127,18 +128,23 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-bean-validators -->
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-bean-validators</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${swagger.version}</version>
-		</dependency>
-	</dependencies>
+        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-bean-validators -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

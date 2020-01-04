@@ -26,5 +26,12 @@ spring:
   liquibase:
     change-log: classpath:db/liquibase/db.changelog-master.yaml
 
+## App Properties
+jwt:
+  jwtSecret: JWTGeniousKey
+  #4 hours
+  jwtExpirationInMs: 14400000
 date:
   pattern: yyyy-MM-dd
+
+

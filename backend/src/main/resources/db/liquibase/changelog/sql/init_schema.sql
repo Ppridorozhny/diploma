@@ -37,6 +37,7 @@ CREATE TABLE pr_user
     first_name VARCHAR(100) NOT NULL,
     last_name  VARCHAR(100) NOT NULL,
     username   VARCHAR(100) NOT NULL,
+    email      VARCHAR(100),
     password   VARCHAR(100) NOT NULL
 );
 
@@ -76,7 +77,7 @@ CREATE TABLE pr_ticket_relation
 (
     relation_id   SERIAL PRIMARY KEY,
     source_id     INTEGER          NOT NULL,
-    target_id    INTEGER          NOT NULL,
+    target_id     INTEGER          NOT NULL,
     relation_type pr_relation_type NOT NULL,
 
     created_by    VARCHAR(255),
@@ -98,7 +99,7 @@ CREATE TABLE pr_comment
 (
     comment_id    BIGSERIAL PRIMARY KEY,
     text          VARCHAR(512) NOT NULL,
-    ticket_id     INTEGER NOT NULL,
+    ticket_id     INTEGER      NOT NULL,
 
     created_by    VARCHAR(255),
     created_when  TIMESTAMP,
