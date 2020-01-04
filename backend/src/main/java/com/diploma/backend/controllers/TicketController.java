@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class TicketController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public TicketDTO createTicket(@RequestBody @Validated TicketDTO ticketDTO) {
         Ticket ticket = mapper.map(ticketDTO, Ticket.class);
         ticket = ticketService.createTicket(ticket);
@@ -50,6 +52,7 @@ public class TicketController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTicket(@PathVariable Integer id) {
         ticketService.deleteTicket(id);
     }
