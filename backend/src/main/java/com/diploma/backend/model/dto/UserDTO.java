@@ -1,16 +1,10 @@
 package com.diploma.backend.model.dto;
 
 import com.diploma.backend.validation.Groups;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Data
@@ -45,8 +39,11 @@ public class UserDTO {
     @NotNull
     @NotBlank
     @Length(max = 100)
+    @ToString.Exclude
     private String password;
 
+    @NotEmpty
+    @NotNull
     @EqualsAndHashCode.Exclude
     private Set<RoleDTO> roleDTOS;
 }

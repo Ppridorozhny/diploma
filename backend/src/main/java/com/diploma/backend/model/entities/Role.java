@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Role extends BaseEntity {
 
     @NotBlank
     @NotNull
+    @NaturalId
     @Length(max = 100)
     private String name;
 

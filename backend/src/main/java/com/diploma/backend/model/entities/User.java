@@ -1,16 +1,10 @@
 package com.diploma.backend.model.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import java.util.Set;
 
 @Data
@@ -49,8 +43,11 @@ public class User extends BaseEntity {
 
     @NotNull
     @Length(max = 100)
+    @ToString.Exclude
     private String password;
 
+    @NotEmpty
+    @NotNull
     @OneToMany
     @JoinTable(name = "pr_user_role",
             joinColumns = @JoinColumn(name = "user_id"),

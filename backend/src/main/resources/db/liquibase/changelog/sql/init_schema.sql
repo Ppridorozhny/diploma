@@ -44,7 +44,7 @@ CREATE TABLE pr_user
 CREATE TABLE pr_role
 (
     role_id SERIAL PRIMARY KEY,
-    name    VARCHAR(100) NOT NULL
+    name VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE pr_user_role
@@ -130,4 +130,9 @@ ALTER TABLE ONLY pr_label
 
 ALTER TABLE ONLY pr_comment
     ADD CONSTRAINT fk_pr_comment_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id);
+
+INSERT INTO pr_role(name)
+VALUES ('USER');
+INSERT INTO pr_role(name)
+VALUES ('ADMIN');
 

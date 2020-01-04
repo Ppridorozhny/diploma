@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Api(tags = {"EnvironmentController"})
 @Validated
 @RestController
-@RequestMapping("/environment")
+@RequestMapping("/api/environment")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class EnvironmentController {
