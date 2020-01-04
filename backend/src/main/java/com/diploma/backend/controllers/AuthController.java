@@ -1,5 +1,6 @@
 package com.diploma.backend.controllers;
 
+import com.diploma.backend.error.exceptions.ResourceNotFoundException;
 import com.diploma.backend.model.dto.ApiResponse;
 import com.diploma.backend.model.dto.JwtAuthenticationResponse;
 import com.diploma.backend.model.dto.UserDTO;
@@ -65,6 +66,9 @@ public class AuthController {
 
         // Creating user's account
         User user = conversionService.convert(userDTO, User.class);
+        if (user != null) {
+            throw new ResourceNotFoundException("dsa", "dsa", "dasd");
+        }
         User result = userService.createUser(user);
 
         URI location = ServletUriComponentsBuilder

@@ -31,6 +31,8 @@ jwt:
   jwtSecret: JWTGeniousKey
   #4 hours
   jwtExpirationInMs: 14400000
+application:
+  stackTraceEnabled: false
 date:
   pattern: yyyy-MM-dd
 
