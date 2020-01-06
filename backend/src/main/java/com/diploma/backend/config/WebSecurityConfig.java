@@ -39,7 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/favicon-32x32.png", "/favicon-16x16.png",
             "/diploma.json",
             "/diploma-manual.json",
-            "/actuator/health", "/actuator/info", "/api/auth/**"};
+            "/actuator/**",
+            "/auth/**"};
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
