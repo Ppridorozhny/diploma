@@ -10,13 +10,18 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserDtoToInstanceConverter implements Converter<UserDTO, User> {
+
+    private static final String ROLE_USER = "USER";
 
     private final RoleRepository roleRepository;
     private final ModelMapper mapper;
@@ -25,12 +30,18 @@ public class UserDtoToInstanceConverter implements Converter<UserDTO, User> {
     public User convert(UserDTO userDTO) {
         User user = mapper.map(userDTO, User.class);
         final Set<Role> roles = userDTO.getRoleDTOS().stream()
-                .map(role -> roleRepository.findByName(role.getName())
-                        .orElseThrow(() -> new ResourceNotFoundException("Role", "name", role.getName())))
+                .map(role -> getRoleByName(role.getName()))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
 
-        user.setRoles(roles);
+        user.setRoles(CollectionUtils.isEmpty(roles) ? Collections.singleton(getRoleByName(ROLE_USER)) : roles);
 
         return user;
     }
+
+    private Role getRoleByName(String roleName) {
+        return roleRepository.findByName(roleName)
+                .orElseThrow(() -> new ResourceNotFoundException("Role", "name", roleName));
+    }
+
 }

@@ -7,8 +7,8 @@ import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
-import {AuthGuard} from "./login/auth.guard";
-import {AuthenticationService} from "./login/authentication.service";
+import {AuthGuard} from "./service/auth.guard";
+import {AuthenticationService} from "./service/authentication.service";
 
 @NgModule({
   declarations: [
