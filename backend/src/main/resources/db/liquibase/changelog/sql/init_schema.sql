@@ -36,15 +36,15 @@ CREATE TABLE pr_user
     user_id    SERIAL PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name  VARCHAR(100) NOT NULL,
-    username   VARCHAR(100) NOT NULL,
-    email      VARCHAR(100),
+    username   VARCHAR(100) NOT NULL UNIQUE,
+    email      VARCHAR(100) NOT NULL UNIQUE,
     password   VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE pr_role
 (
     role_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE
+    name    VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE pr_user_role
