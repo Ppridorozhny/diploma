@@ -1,5 +1,6 @@
 package com.diploma.backend.service.impl;
 
+import com.diploma.backend.error.exceptions.ResourceNotFoundException;
 import com.diploma.backend.model.entities.User;
 import com.diploma.backend.repository.UserRepository;
 import com.diploma.backend.service.UserService;
@@ -29,7 +30,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(Integer id) {
-        return userRepository.getOne(id);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
     }
 
     @Override

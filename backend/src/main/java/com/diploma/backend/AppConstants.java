@@ -11,6 +11,8 @@ public class AppConstants {
     public static final Type TICKET_LIST_TYPE = (new TypeToken<List<TicketDTO>>() {
     }).getType();
 
+    public static final String TOKEN_TYPE = "Bearer ";
+
     private AppConstants() {
     }
 }

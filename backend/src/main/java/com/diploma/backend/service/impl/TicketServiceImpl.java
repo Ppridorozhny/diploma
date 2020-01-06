@@ -1,5 +1,6 @@
 package com.diploma.backend.service.impl;
 
+import com.diploma.backend.error.exceptions.ResourceNotFoundException;
 import com.diploma.backend.model.entities.Ticket;
 import com.diploma.backend.repository.TicketRepository;
 import com.diploma.backend.service.TicketService;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
 
     @Override
+    @Transactional(rollbackFor = Throwable.class)
     public Ticket createTicket(Ticket ticket) {
         return ticketRepository.save(ticket);
     }
@@ -33,10 +36,12 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket getTicket(Integer id) {
-        return ticketRepository.getOne(id);
+        return ticketRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ticket", "id", id));
     }
 
     @Override
+    @Transactional(rollbackFor = Throwable.class)
     public void deleteTicket(Integer id) {
         ticketRepository.deleteTicketById(id);
     }
