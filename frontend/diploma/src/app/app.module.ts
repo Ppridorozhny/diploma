@@ -11,6 +11,8 @@ import {AuthGuard} from "./service/auth.guard";
 import {AuthenticationService} from "./service/authentication.service";
 import {JwtInterceptor} from "./service/jwt.interceptor";
 import {ErrorInterceptor} from "./service/error.interceptor";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {ErrorInterceptor} from "./service/error.interceptor";
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthGuard,

@@ -5,7 +5,6 @@ import com.diploma.backend.model.dto.JwtAuthenticationResponse;
 import com.diploma.backend.model.dto.UserDTO;
 import com.diploma.backend.model.dto.UserLoginDTO;
 import com.diploma.backend.model.entities.User;
-import com.diploma.backend.repository.UserRepository;
 import com.diploma.backend.service.AccountService;
 import com.diploma.backend.service.UserService;
 import com.diploma.backend.validation.Groups;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthController {
 
-    private final UserRepository userRepository;
     private final ConversionService conversionService;
     private final AccountService accountService;
     private final ModelMapper mapper;

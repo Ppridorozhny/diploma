@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
 
 @Data
 @AllArgsConstructor
@@ -12,6 +11,6 @@ import org.springframework.http.HttpStatus;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorResponse {
     private String message;
-    private HttpStatus status;
+    private int status;
     private String debugDetails;
 }

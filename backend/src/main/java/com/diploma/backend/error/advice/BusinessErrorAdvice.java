@@ -28,24 +28,24 @@ public class BusinessErrorAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public List<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        return createErrorResponseFromMethodArgumentNotValidException(ex, HttpStatus.BAD_REQUEST);
+        return createErrorResponseFromMethodArgumentNotValidException(ex, HttpStatus.BAD_REQUEST.value());
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public List<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException ex) {
         String stackTrace = isStackTraceEnabled ? ExceptionUtils.getStackTrace(ex) : null;
-        return Collections.singletonList(new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND, stackTrace));
+        return Collections.singletonList(new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND.value(), stackTrace));
     }
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public List<ErrorResponse> handleResourceNotFoundException(Exception ex) {
         String stackTrace = isStackTraceEnabled ? ExceptionUtils.getStackTrace(ex) : null;
-        return Collections.singletonList(new ErrorResponse(ex.getCause().getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, stackTrace));
+        return Collections.singletonList(new ErrorResponse(ex.getCause().getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value(), stackTrace));
     }
 
-    private List<ErrorResponse> createErrorResponseFromMethodArgumentNotValidException(MethodArgumentNotValidException ex, HttpStatus status) {
+    private List<ErrorResponse> createErrorResponseFromMethodArgumentNotValidException(MethodArgumentNotValidException ex, int status) {
         String stackTrace = isStackTraceEnabled ? ExceptionUtils.getStackTrace(ex) : null;
 
         return ex.getBindingResult().getAllErrors().stream()
