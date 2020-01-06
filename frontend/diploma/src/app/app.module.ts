@@ -7,6 +7,8 @@ import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
+import {AuthGuard} from "./login/auth.guard";
+import {AuthenticationService} from "./login/authentication.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
