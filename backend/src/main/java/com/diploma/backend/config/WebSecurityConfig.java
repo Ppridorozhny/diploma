@@ -1,5 +1,6 @@
 package com.diploma.backend.config;
 
+import com.diploma.backend.AppConstants;
 import com.diploma.backend.security.JwtAuthenticationEntryPoint;
 import com.diploma.backend.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -65,24 +66,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors()
                 .and()
-                .csrf()
-                .disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                    .csrf()
+                    .disable()
+                    .exceptionHandling()
+                    .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
-                .sessionManagement()
-                // make sure we use stateless session; session won't be used to store user's state.
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .sessionManagement()
+                    // make sure we use stateless session; session won't be used to store user's state.
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests()
-                .antMatchers(allowedURIs)
+                    .authorizeRequests()
+                    .antMatchers(allowedURIs)
                 .permitAll()
-                .anyRequest()
-                .authenticated()
+                    .anyRequest()
+                    .hasAnyAuthority(AppConstants.ROLE_USER, AppConstants.ROLE_ADMIN)
                 .and()
-                .logout()
-                .logoutUrl("/auth/logout")
-                .invalidateHttpSession(true);
+                    .logout()
+                    .logoutUrl("/auth/logout")
+                    .invalidateHttpSession(true);
 
         // Add our custom JWT security filter
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

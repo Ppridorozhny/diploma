@@ -1,7 +1,7 @@
 package com.diploma.backend;
 
 import com.diploma.backend.model.dto.TicketDTO;
-import com.diploma.backend.model.dto.UserDTO;
+import com.diploma.backend.model.dto.UserShortDTO;
 import org.modelmapper.TypeToken;
 
 import java.lang.reflect.Type;
@@ -12,8 +12,12 @@ public class AppConstants {
     public static final Type TICKET_LIST_TYPE = (new TypeToken<List<TicketDTO>>() {
     }).getType();
 
-    public static final Type USER_LIST_TYPE = (new TypeToken<List<UserDTO>>() {
+    public static final Type USER_SHORT_LIST_TYPE = (new TypeToken<List<UserShortDTO>>() {
     }).getType();
+
+    public static final String ROLE_USER = "USER";
+
+    public static final String ROLE_ADMIN = "ADMIN";
 
     public static final String TOKEN_TYPE = "Bearer ";
 

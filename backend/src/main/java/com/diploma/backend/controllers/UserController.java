@@ -1,6 +1,7 @@
 package com.diploma.backend.controllers;
 
-import com.diploma.backend.model.dto.UserDTO;
+import com.diploma.backend.AppConstants;
+import com.diploma.backend.model.dto.UserShortDTO;
 import com.diploma.backend.service.UserService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.diploma.backend.AppConstants.USER_LIST_TYPE;
-
 @Api(tags = {"UserController"})
 @Validated
 @RestController
@@ -29,15 +28,15 @@ public class UserController {
     private final ModelMapper mapper;
 
     @GetMapping
-    public List<UserDTO> getAllUsers() {
+    public List<UserShortDTO> getAllUsers() {
         log.debug("Get all users");
-        return mapper.map(userService.getAllUsers(), USER_LIST_TYPE);
+        return mapper.map(userService.getAllUsers(), AppConstants.USER_SHORT_LIST_TYPE);
     }
 
     @GetMapping("/{username}")
-    public UserDTO getUserByUsername(@PathVariable String username) {
+    public UserShortDTO getUserByUsername(@PathVariable String username) {
         log.debug("Get user with username {}", username);
-        return mapper.map(userService.getUserByUsername(username), UserDTO.class);
+        return mapper.map(userService.getUserByUsername(username), UserShortDTO.class);
     }
 
 }
