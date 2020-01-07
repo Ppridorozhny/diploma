@@ -36,4 +36,8 @@ application:
 date:
   pattern: yyyy-MM-dd
 
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics
