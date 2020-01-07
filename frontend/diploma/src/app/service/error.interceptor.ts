@@ -7,7 +7,7 @@ import {ToastrService} from "ngx-toastr";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  private errors : Error[];
+  private errors: Error[];
 
   constructor(private authenticationService: AuthenticationService,
               private toastr: ToastrService) {
@@ -26,9 +26,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.showError(error.message, "Error");
         })
       }
-      setTimeout(()=>{
-        console.log(err);
-      }, 3000);
+      setTimeout( () => {
+          console.log(err);
+        }, 5000
+      );
       const error = err.error.message || err.statusText;
       return throwError(error);
     }))

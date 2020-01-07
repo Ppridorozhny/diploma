@@ -19,6 +19,10 @@ export class JwtInterceptor implements HttpInterceptor {
       });
     }
 
+    if (request.method !== 'GET') {
+      request.headers.append('Content-Type', 'application/json; charset=utf-8');
+    }
+
     return next.handle(request);
   }
 }

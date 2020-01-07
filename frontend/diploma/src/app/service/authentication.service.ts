@@ -5,7 +5,7 @@ import {UserLoginDTO} from "../model/user.login";
 import {UserDetails} from "../model/user.details";
 import {map} from "rxjs/operators";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
   public currentUser: Observable<UserDetails>;
   private currentUserSubject: BehaviorSubject<UserDetails>;
@@ -19,7 +19,7 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(account : UserLoginDTO) {
+  login(account: UserLoginDTO) {
     return this.http.post<UserDetails>('auth/login', account).pipe(
       map(user => {
         if (user && user.accessToken) {
@@ -32,6 +32,12 @@ export class AuthenticationService {
   }
 
   logout() {
+
+    this.http.post<any>('auth/logout', null)
+      .subscribe(
+        () => {},
+        () => console.error
+      );
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
