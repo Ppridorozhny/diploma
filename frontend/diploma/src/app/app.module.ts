@@ -13,6 +13,7 @@ import {JwtInterceptor} from "./service/jwt.interceptor";
 import {ErrorInterceptor} from "./service/error.interceptor";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {UserService} from "./service/user.service";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   providers: [
     AuthGuard,
     AuthenticationService,
+    UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

@@ -1,11 +1,5 @@
-export class UserDetails {
+import {User} from "./user";
+
+export class UserDetails extends User {
   accessToken: string;
-
-  firstName: string;
-
-  lastName: string;
-
-  username: string;
-
-  email: string;
 }
