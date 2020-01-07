@@ -1,10 +1,11 @@
 package com.diploma.backend.controllers;
 
-import com.diploma.backend.model.entities.User;
+import com.diploma.backend.model.dto.UserDTO;
 import com.diploma.backend.service.UserService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static com.diploma.backend.AppConstants.USER_LIST_TYPE;
 
 @Api(tags = {"UserController"})
 @Validated
@@ -23,17 +26,18 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final ModelMapper mapper;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         log.debug("Get all users");
-        return userService.getAllUsers();
+        return mapper.map(userService.getAllUsers(), USER_LIST_TYPE);
     }
 
     @GetMapping("/{username}")
-    public User getUserByUsername(@PathVariable String username) {
+    public UserDTO getUserByUsername(@PathVariable String username) {
         log.debug("Get user with username {}", username);
-        return userService.getUserByUsername(username);
+        return mapper.map(userService.getUserByUsername(username), UserDTO.class);
     }
 
 }
