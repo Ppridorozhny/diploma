@@ -53,6 +53,8 @@ public class Ticket extends BaseAuditEntity {
     @NotNull
     private Date dueDate;
 
+    private boolean automated;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assignee_id", nullable = false)
     @EqualsAndHashCode.Exclude
