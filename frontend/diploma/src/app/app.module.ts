@@ -14,6 +14,7 @@ import {ErrorInterceptor} from "./service/error.interceptor";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {UserService} from "./service/user.service";
+import {AlertService} from "./service/alert.service";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {UserService} from "./service/user.service";
     AuthGuard,
     AuthenticationService,
     UserService,
+    AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
