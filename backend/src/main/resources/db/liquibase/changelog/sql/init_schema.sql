@@ -66,6 +66,7 @@ CREATE TABLE pr_ticket
     reporter_id   INTEGER        NOT NULL,
     resolution    pr_resolution  NOT NULL,
     epic_id       INTEGER,
+    project_id    INTEGER,
     due_date      TIMESTAMP,
 
     created_by    VARCHAR(255),
@@ -110,6 +111,19 @@ CREATE TABLE pr_comment
     modified_when TIMESTAMP
 );
 
+CREATE TABLE pr_project
+(
+    project_id    SERIAL PRIMARY KEY,
+    name          VARCHAR(255) NOT NULL,
+    description   VARCHAR(512) NOT NULL,
+
+    created_by    VARCHAR(255),
+    created_when  TIMESTAMP,
+    modified_by   VARCHAR(255),
+    modified_id   TIMESTAMP,
+    modified_when TIMESTAMP
+);
+
 ALTER TABLE ONLY pr_user_role
     ADD CONSTRAINT fk_pr_user_role FOREIGN KEY (user_id) REFERENCES pr_user (user_id);
 ALTER TABLE ONLY pr_user_role
@@ -121,6 +135,8 @@ ALTER TABLE ONLY pr_ticket
     ADD CONSTRAINT fk_pr_ticket_reporter FOREIGN KEY (reporter_id) REFERENCES pr_user (user_id);
 ALTER TABLE ONLY pr_ticket
     ADD CONSTRAINT fk_pr_ticket_epic FOREIGN KEY (epic_id) REFERENCES pr_ticket (ticket_id);
+ALTER TABLE ONLY pr_ticket
+    ADD CONSTRAINT fk_pr_ticket_project FOREIGN KEY (project_id) REFERENCES pr_project (project_id);
 
 ALTER TABLE ONLY pr_ticket_relation
     ADD CONSTRAINT fk_pr_ticket_relation_source FOREIGN KEY (source_id) REFERENCES pr_ticket (ticket_id);
