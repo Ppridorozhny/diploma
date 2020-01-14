@@ -28,7 +28,9 @@ CREATE TYPE pr_relation_type as ENUM (
     'RELATES TO',
     'BLOCKS',
     'BLOCKED BY',
-    'DUPLICATES'
+    'DUPLICATES',
+    'CHILD',
+    'PARENT'
     );
 
 CREATE TABLE pr_user
