@@ -79,5 +79,8 @@ public class Ticket extends BaseAuditEntity {
     @EqualsAndHashCode.Exclude
     private Set<TicketRelation> relations;
 
-    //todo add component
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = false)
+    @EqualsAndHashCode.Exclude
+    private Project project;
 }
