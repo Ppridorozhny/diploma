@@ -1,5 +1,6 @@
 package com.diploma.backend.controllers;
 
+import com.diploma.backend.config.WebSecurityConfig;
 import com.diploma.backend.model.dto.ApiResponse;
 import com.diploma.backend.model.dto.JwtAuthenticationResponse;
 import com.diploma.backend.model.dto.UserDTO;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@ConditionalOnBean(WebSecurityConfig.class)
 public class AuthController {
 
     private final ConversionService conversionService;

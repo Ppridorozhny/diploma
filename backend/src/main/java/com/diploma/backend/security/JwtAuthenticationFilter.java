@@ -1,8 +1,10 @@
 package com.diploma.backend.security;
 
 import com.diploma.backend.AppConstants;
+import com.diploma.backend.config.WebSecurityConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +22,7 @@ import java.io.IOException;
 
 @Slf4j
 @Component
+@ConditionalOnBean(WebSecurityConfig.class)
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
@@ -54,7 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(AppConstants.TOKEN_TYPE)) {
-            return bearerToken.substring(7, bearerToken.length());
+            return bearerToken.substring(7);
         }
         return null;
     }

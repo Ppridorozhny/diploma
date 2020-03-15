@@ -1,6 +1,7 @@
 package com.diploma.backend.service.impl;
 
 import com.diploma.backend.AppConstants;
+import com.diploma.backend.config.WebSecurityConfig;
 import com.diploma.backend.model.dto.JwtAuthenticationResponse;
 import com.diploma.backend.model.dto.UserLoginDTO;
 import com.diploma.backend.security.JwtTokenProvider;
@@ -9,6 +10,7 @@ import com.diploma.backend.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@ConditionalOnBean(WebSecurityConfig.class)
 public class AccountServiceImpl implements AccountService {
 
     private final AuthenticationManager authenticationManager;
