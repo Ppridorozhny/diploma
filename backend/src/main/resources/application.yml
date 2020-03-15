@@ -3,13 +3,17 @@ server:
 
 debug: true
 
+logging:
+  level:
+    com: debug
+
 # Hibernate ddl auto (create, create-drop, validate, update)
 spring:
   jpa:
     hibernate:
       ddl-auto: validate
     show-sql: true
-#optimization for batching to group statements and send it in one
+    #optimization for batching to group statements and send it in one
     properties:
       hibernate:
         order_inserts: true
@@ -48,6 +52,9 @@ kafka:
   diploma:
     number.partitions: 1
     replication.factor: 1
+    consumer.group-id: dp
+    max.poll.records: 50
+    fetch.min.bytes: 1
     timeout: 200000
     defects:
       topic: diploma-defects
