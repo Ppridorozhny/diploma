@@ -36,6 +36,7 @@ public class KafkaProducerConfig {
         return new DefaultKafkaProducerFactory<>(properties);
     }
 
+    @Bean
     @SuppressWarnings("unchecked")
     public KafkaTemplate<String, DefectEvent> kafkaTemplateDefect(@Value("${kafka.diploma.defects.topic}") String topic) {
         final KafkaTemplate<String, DefectEvent> kafkaTemplate =

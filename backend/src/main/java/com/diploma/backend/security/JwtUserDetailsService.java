@@ -1,11 +1,9 @@
 package com.diploma.backend.security;
 
-import com.diploma.backend.config.WebSecurityConfig;
 import com.diploma.backend.model.entities.User;
 import com.diploma.backend.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,7 +15,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @Service
-@ConditionalOnBean(WebSecurityConfig.class)
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
