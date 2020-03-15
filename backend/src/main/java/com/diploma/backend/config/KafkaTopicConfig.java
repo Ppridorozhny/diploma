@@ -12,17 +12,24 @@ import java.util.Map;
 @Configuration
 public class KafkaTopicConfig {
 
-    @Value(value = "kafka.bootstrapAddress")
+    @Value("${kafka.server}")
     private String bootstrapAddress;
+    @Value("${kafka.diploma.timeout}")
+    private Integer timeout;
+    @Value("${kafka.diploma.number.partitions}")
+    private Integer numberOfPartitions;
+    @Value("${kafka.diploma.replication.factor}")
+    private Short replicationFactor;
 
     public KafkaAdmin kafkaAdmin() {
         Map<String, Object> configs = new HashMap<>();
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        configs.put(AdminClientConfig.REQUEST_TIMEOUT_MS_CONFIG, timeout);
         return new KafkaAdmin(configs);
     }
 
     public NewTopic defects() {
-        return new NewTopic("defects", 1, (short) 1);
+        return new NewTopic("defects", numberOfPartitions, replicationFactor);
     }
 
 }

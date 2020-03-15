@@ -1,5 +1,7 @@
 package com.diploma.backend.service;
 
+import com.diploma.backend.model.kafka.DefectEvent;
+
 public interface KafkaMessageService {
-    public void sendMessage(String message);
+    void sendDefectEvent(DefectEvent event);
 }

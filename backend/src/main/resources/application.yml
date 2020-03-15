@@ -41,3 +41,16 @@ management:
     web:
       exposure:
         include: info, health, metrics
+
+kafka:
+  server: localhost:9092
+  application.id:
+  diploma:
+    number.partitions: 1
+    replication.factor: 1
+    timeout: 200000
+    defects:
+      topic: diploma-defects
+    streams:
+      replication.factor: 1
+      application.server.config: localhost:${server.port}
