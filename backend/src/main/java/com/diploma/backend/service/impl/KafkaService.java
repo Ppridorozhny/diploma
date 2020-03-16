@@ -31,13 +31,11 @@ public class KafkaService {
         try (AdminClient client = AdminClient.create(kafkaAdmin.getConfig())) {
             if (!isTopicExists(topicName, client)) {
                 Map<String, String> config = new HashMap<>();
-                if (retention != null) {
-                    config.put(RETENTION, String.valueOf(retention));
-                }
+
+                Optional.ofNullable(retention).ifPresent(r -> config.put(RETENTION, String.valueOf(r)));
                 List<NewTopic> topicList = List.of(new NewTopic(topicName, numberOfPartitions, replicationFactor)
                         .configs(config));
-                CreateTopicsOptions createOptions = new CreateTopicsOptions();
-                client.createTopics(topicList, createOptions).all().get();
+                client.createTopics(topicList, new CreateTopicsOptions()).all().get();
                 return true;
             }
             return false;
@@ -49,9 +47,9 @@ public class KafkaService {
     public boolean deleteTopic(String topicName) throws InterruptedException, ExecutionException {
         try (AdminClient client = AdminClient.create(kafkaAdmin.getConfig())) {
             if (isTopicExists(topicName, client)) {
-                DeleteTopicsOptions deleteOptions = new DeleteTopicsOptions();
-                KafkaFuture<Void> result = client.deleteTopics(Collections.singleton(topicName), deleteOptions).all();
-                result.get();
+                client.deleteTopics(Collections.singleton(topicName), new DeleteTopicsOptions())
+                        .all()
+                        .get();
                 return true;
             }
             return false;
@@ -68,7 +66,7 @@ public class KafkaService {
             Set<String> topicNamesSet = listResult.get();
             return topicNamesSet.contains(topicName);
         } catch (InterruptedException | ExecutionException e) {
-            log.error("Unable to check topic for exist: {}", topicName);
+            log.error("Unable to check topic for existence: {}", topicName);
             throw new KafkaException(e);
         }
 
