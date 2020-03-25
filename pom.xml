@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <name>parent</name>
-    <description>The Diploma parent project</description>
+    <description>The Diploma parent project.</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
