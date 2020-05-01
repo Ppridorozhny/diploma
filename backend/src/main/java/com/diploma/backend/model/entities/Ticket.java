@@ -70,21 +70,11 @@ public class Ticket extends BaseAuditEntity {
 
     private String seriesId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assignee_id", nullable = false)
-    @EqualsAndHashCode.Exclude
-    private User assignee;
+    private Integer assigneeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reporter_id", nullable = false, updatable = false)
-    @NotNull
-    @EqualsAndHashCode.Exclude
-    private User reporter;
+    private Integer reporterId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "epic_id", nullable = false)
-    @EqualsAndHashCode.Exclude
-    private Ticket epic;
+    private Integer epicId;
 
     @ElementCollection
     @CollectionTable(name = "pr_label", joinColumns = @JoinColumn(name = "label_id"))

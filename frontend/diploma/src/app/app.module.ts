@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./service/auth.guard";
 import {AuthenticationService} from "./service/authentication.service";
 import {JwtInterceptor} from "./service/jwt.interceptor";
@@ -18,6 +18,7 @@ import {AlertService} from "./service/alert.service";
 import {TicketComponent} from './ticket/ticket/ticket.component';
 import {TicketAddComponent} from './ticket/ticket.add/ticket.add.component';
 import {TicketEditComponent} from './ticket/ticket.edit/ticket.edit.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -32,9 +33,11 @@ import {TicketEditComponent} from './ticket/ticket.edit/ticket.edit.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
     AuthGuard,
