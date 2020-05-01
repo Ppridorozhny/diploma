@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
         UserPrincipal user = (UserPrincipal) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
         log.debug("User {} is signed in", user);
-        return new JwtAuthenticationResponse(jwt, user.getFirstName(), user.getLastName(),
+        return new JwtAuthenticationResponse(user.getId(), jwt, user.getFirstName(), user.getLastName(),
                 user.getUsername(), user.getEmail());
     }
 
