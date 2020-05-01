@@ -1,12 +1,18 @@
 package com.diploma.backend.model.dto;
 
-import lombok.*;
-import org.hibernate.validator.constraints.Length;
+import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
+
+import org.hibernate.validator.constraints.Length;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -24,4 +30,5 @@ public class UserDTO extends UserShortDTO {
     @NotNull
     @EqualsAndHashCode.Exclude
     private Set<RoleDTO> roles;
+
 }

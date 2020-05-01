@@ -1,10 +1,10 @@
 package com.diploma.backend.model.enums;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
-
-import java.util.Arrays;
 
 @Getter
 public enum Priority {
@@ -33,5 +33,4 @@ public enum Priority {
     public String toString() {
         return this.getKeyName();
     }
-
 }

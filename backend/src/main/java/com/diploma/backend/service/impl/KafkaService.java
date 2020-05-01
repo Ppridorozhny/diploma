@@ -1,8 +1,18 @@
 package com.diploma.backend.service.impl;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.admin.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
+
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.CreateTopicsOptions;
+import org.apache.kafka.clients.admin.DeleteTopicsOptions;
+import org.apache.kafka.clients.admin.ListTopicsOptions;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.KafkaFuture;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +20,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.concurrent.ExecutionException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -31,7 +41,6 @@ public class KafkaService {
         try (AdminClient client = AdminClient.create(kafkaAdmin.getConfig())) {
             if (!isTopicExists(topicName, client)) {
                 Map<String, String> config = new HashMap<>();
-
                 Optional.ofNullable(retention).ifPresent(r -> config.put(RETENTION, String.valueOf(r)));
                 List<NewTopic> topicList = List.of(new NewTopic(topicName, numberOfPartitions, replicationFactor)
                         .configs(config));
@@ -69,7 +78,6 @@ public class KafkaService {
             log.error("Unable to check topic for existence: {}", topicName);
             throw new KafkaException(e);
         }
-
     }
 
 }

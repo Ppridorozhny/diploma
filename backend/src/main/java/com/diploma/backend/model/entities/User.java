@@ -1,15 +1,29 @@
 package com.diploma.backend.model.entities;
 
-import lombok.*;
-import lombok.experimental.FieldNameConstants;
-import org.hibernate.validator.constraints.Length;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Set;
+
+import org.hibernate.validator.constraints.Length;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.FieldNameConstants;
 
 @Data
 @Entity
@@ -61,4 +75,5 @@ public class User extends BaseEntity {
     )
     @EqualsAndHashCode.Exclude
     private Set<Role> roles;
+
 }

@@ -1,7 +1,8 @@
 package com.diploma.backend.security;
 
-import com.diploma.backend.model.entities.User;
-import com.diploma.backend.repository.UserRepository;
+import java.util.Optional;
+import java.util.function.Function;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,8 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-import java.util.function.Function;
+import com.diploma.backend.model.entities.User;
+import com.diploma.backend.repository.UserRepository;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -42,7 +43,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         User user = function.apply(searchParameter).orElseThrow(
                 () -> new UsernameNotFoundException(errorMessage)
         );
-
         return UserPrincipal.create(user);
     }
 

@@ -1,11 +1,16 @@
 package com.diploma.backend.config;
 
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
+
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -22,10 +27,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.common.SwaggerPluginSupport;
 import springfox.documentation.swagger.schema.ApiModelPropertyPropertyBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 
 @Configuration
 @EnableSwagger2
@@ -93,4 +94,5 @@ public class SwaggerConfig {
         authorizationScopes[0] = authorizationScope;
         return Collections.singletonList(new SecurityReference(AUTHORIZATION_HEADER, authorizationScopes));
     }
+
 }

@@ -1,13 +1,13 @@
 package com.diploma.backend.model.dto;
 
+import javax.validation.constraints.NotNull;
+
 import com.diploma.backend.model.enums.RelationType;
 import com.diploma.backend.validation.Groups;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor

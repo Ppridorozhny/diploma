@@ -127,11 +127,11 @@ CREATE TABLE pr_project
 
 CREATE TABLE pr_run
 (
-    run_id            SERIAL PRIMARY KEY,
-    ticket_id         INTEGER NOT NULL,
-    series_id         VARCHAR(255) NOT NULL,
-    started_when      TIMESTAMP NOT NULL,
-    completed_when    TIMESTAMP
+    run_id         SERIAL PRIMARY KEY,
+    ticket_id      INTEGER      NOT NULL,
+    series_id      VARCHAR(255) NOT NULL,
+    started_when   TIMESTAMP    NOT NULL,
+    completed_when TIMESTAMP
 );
 
 ALTER TABLE ONLY pr_user_role

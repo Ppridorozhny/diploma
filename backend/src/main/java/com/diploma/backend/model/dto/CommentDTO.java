@@ -1,14 +1,15 @@
 package com.diploma.backend.model.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.diploma.backend.validation.Groups;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -25,4 +26,5 @@ public class CommentDTO {
 
     @EqualsAndHashCode.Exclude
     private TicketDTO ticketDTO;
+
 }

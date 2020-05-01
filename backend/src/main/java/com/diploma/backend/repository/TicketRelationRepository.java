@@ -1,7 +1,9 @@
 package com.diploma.backend.repository;
 
-import com.diploma.backend.model.entities.TicketRelation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.diploma.backend.model.entities.TicketRelation;
+
 public interface TicketRelationRepository extends JpaRepository<TicketRelation, Integer> {
+
 }

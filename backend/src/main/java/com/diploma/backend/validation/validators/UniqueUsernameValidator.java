@@ -1,11 +1,12 @@
 package com.diploma.backend.validation.validators;
 
-import com.diploma.backend.repository.UserRepository;
-import com.diploma.backend.validation.UniqueUsernameConstraint;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.diploma.backend.repository.UserRepository;
+import com.diploma.backend.validation.UniqueUsernameConstraint;
 
 public class UniqueUsernameValidator implements
         ConstraintValidator<UniqueUsernameConstraint, String> {
@@ -20,4 +21,5 @@ public class UniqueUsernameValidator implements
         }
         return true;
     }
+
 }

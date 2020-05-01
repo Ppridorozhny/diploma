@@ -1,13 +1,14 @@
 package com.diploma.backend.service.impl;
 
-import com.diploma.backend.model.kafka.DefectEvent;
-import com.diploma.backend.service.KafkaMessageService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFutureCallback;
+
+import com.diploma.backend.model.kafka.DefectEvent;
+import com.diploma.backend.service.KafkaMessageService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -33,4 +34,5 @@ public class KafkaMessageServiceImpl implements KafkaMessageService {
             }
         };
     }
+
 }

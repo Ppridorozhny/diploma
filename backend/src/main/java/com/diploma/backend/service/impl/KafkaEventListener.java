@@ -1,13 +1,14 @@
 package com.diploma.backend.service.impl;
 
-import com.diploma.backend.model.kafka.DefectEvent;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.converter.KafkaMessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.diploma.backend.model.kafka.DefectEvent;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service

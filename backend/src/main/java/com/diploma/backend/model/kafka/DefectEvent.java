@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DefectEvent implements KafkaMessage {
+
     private String code;
     private Integer projectId;
     private String description;
+
 }

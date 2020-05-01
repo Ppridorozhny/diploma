@@ -4,5 +4,6 @@
 @TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
 package com.diploma.backend.model;
 
-import com.diploma.backend.model.type.PostgresEnumType;
 import org.hibernate.annotations.TypeDef;
+
+import com.diploma.backend.model.type.PostgresEnumType;

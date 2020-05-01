@@ -1,5 +1,14 @@
 package com.diploma.backend.model.dto;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.diploma.backend.model.enums.Priority;
 import com.diploma.backend.model.enums.Resolution;
 import com.diploma.backend.model.enums.TicketType;
@@ -8,13 +17,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -59,4 +61,5 @@ public class TicketDTO {
 
     @EqualsAndHashCode.Exclude
     private Set<TicketRelationDTO> relations;
+
 }
