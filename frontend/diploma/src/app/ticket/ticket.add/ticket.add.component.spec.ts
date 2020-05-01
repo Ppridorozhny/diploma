@@ -2,8 +2,8 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {TicketAddComponent} from './ticket.add.component';
 
 describe('Ticket.AddComponent', () => {
-  let component: Ticket.AddComponent;
-  let fixture: ComponentFixture<Ticket.AddComponent>;
+  let component: TicketAddComponent;
+  let fixture: ComponentFixture<TicketAddComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
