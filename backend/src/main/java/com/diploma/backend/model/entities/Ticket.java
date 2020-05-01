@@ -1,5 +1,28 @@
 package com.diploma.backend.model.entities;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.diploma.backend.model.enums.Priority;
 import com.diploma.backend.model.enums.Resolution;
 import com.diploma.backend.model.enums.TicketType;
@@ -7,14 +30,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -53,7 +68,7 @@ public class Ticket extends BaseAuditEntity {
     @NotNull
     private Date dueDate;
 
-    private boolean automated;
+    private String seriesId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assignee_id", nullable = false)
@@ -85,4 +100,5 @@ public class Ticket extends BaseAuditEntity {
     @JoinColumn(name = "project_id", nullable = false)
     @EqualsAndHashCode.Exclude
     private Project project;
+
 }
