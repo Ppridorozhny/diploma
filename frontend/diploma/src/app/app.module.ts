@@ -15,12 +15,18 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {UserService} from "./service/user.service";
 import {AlertService} from "./service/alert.service";
+import {TicketComponent} from './ticket/ticket/ticket.component';
+import {TicketAddComponent} from './ticket/ticket.add/ticket.add.component';
+import {TicketEditComponent} from './ticket/ticket.edit/ticket.edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
+    TicketComponent,
+    TicketAddComponent,
+    TicketEditComponent,
   ],
   imports: [
     BrowserModule,
