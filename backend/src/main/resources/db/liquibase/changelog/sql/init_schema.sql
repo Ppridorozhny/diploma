@@ -162,6 +162,15 @@ ALTER TABLE ONLY pr_comment
 ALTER TABLE ONLY pr_run
     ADD CONSTRAINT fk_pr_run_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id);
 
+CREATE INDEX pr_run_series_id
+    ON pr_run (series_id);
+CREATE INDEX pr_project_name
+    ON pr_project (name);
+CREATE INDEX pr_comment_ticket_id
+    ON pr_comment (ticket_id);
+CREATE INDEX pr_ticket_name
+    ON pr_ticket (name);
+
 INSERT INTO pr_role(name)
 VALUES ('USER');
 INSERT INTO pr_role(name)
