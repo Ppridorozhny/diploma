@@ -18,18 +18,18 @@ import {Resolution} from "../../model/resolution";
 })
 export class TicketAddComponent implements OnInit {
 
-  private ticket: Ticket;
-  private projectId: number;
-  private reporter: User;
-  private users: User[] = [];
-  private currentDate: string;
-  private priorities: any = Priority;
-  private ticketType: any = TicketType;
-  private time: string;
-  private date: string;
-  private keywordAssignee = 'username';
-  private keyword = 'name';
-  private epics: Ticket[] = [];
+  ticket: Ticket;
+  projectId: number;
+  reporter: User;
+  users: User[] = [];
+  currentDate: string;
+  priorities: any = Priority;
+  ticketType: any = TicketType;
+  time: string;
+  date: string;
+  keywordAssignee = 'username';
+  keyword = 'name';
+  epics: Ticket[] = [];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -106,14 +106,14 @@ export class TicketAddComponent implements OnInit {
         this.redirectToTicket(ticket);
 
         this.resetTicket();
-      }, error => {
+      }, () => {
         this.alertService.error('Unsuccessful ticket adding', 'Adding error');
         this.spinner.hide();
       });
   }
 
   redirectToTicket(ticket: Ticket) {
-    this.router.navigate(["/project/" + this.projectId + "/ticket/" + this.ticket.id]);
+    this.router.navigate(["/project/" + this.projectId + "/ticket/" + ticket.id]);
   }
 
   selectAssignee(user: User) {
