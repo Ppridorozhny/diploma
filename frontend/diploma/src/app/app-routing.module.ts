@@ -10,7 +10,7 @@ import {TicketEditComponent} from "./ticket/ticket.edit/ticket.edit.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'project/:projectId/ticket', component: TicketAddComponent, canActivate: [AuthGuard]},
+  {path: 'project/:projectId/ticket/create', component: TicketAddComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/:ticketId', component: TicketComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/:ticketId/edit', component: TicketEditComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},

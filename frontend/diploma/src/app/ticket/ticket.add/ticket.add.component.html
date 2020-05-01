@@ -1,1 +1,138 @@
-<p>ticket.add works!</p>
+<div class="container-fluid" style="margin-top:20px">
+  <ngx-spinner bdColor="#333"
+               bdOpacity=0.9
+               color="#fff"
+               size="default"
+               type="ball-beat"></ngx-spinner>
+
+  <div class="col-8">
+    <div class="container justify-content-center">
+
+      <form #addTicketForm="ngForm" name="form" role="form">
+
+        <div class="py-4 d-flex justify-content-between flex-wrap align-items-center">
+          <h2>Add ticket</h2>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input #name="ngModel" [(ngModel)]="ticket.name" class="form-control"
+                 id="name" maxlength="100" minlength="4" name="name"
+                 pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$" placeholder="name" required type="text"/>
+          <div *ngIf="name.dirty && name.invalid">
+            <small *ngIf="name.errors.required" class="form-text text-danger">
+              Event name is required.
+            </small>
+            <small *ngIf="name.errors.minlength" class="form-text text-danger">
+              Event name is required to be at least 4 character.
+            </small>
+            <small *ngIf="name.errors.maxlength" class="form-text text-danger">
+              Event name cannot be longer than 100 characters.
+            </small>
+            <small *ngIf="name.errors.pattern" class="form-text text-danger">
+              Event name can only contain letters and digits.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ticketType">Ticket type:</label>
+          <select [(ngModel)]="ticket.type" class="form-control" id="ticketType" name="ticketPriority">
+            <option value="{{ticketType.DEFECT}}">{{ticketType.DEFECT}}</option>
+            <option selected value="{{ticketType.TASK}}">{{ticketType.TASK}}</option>
+            <option value="{{ticketType.STORY}}">{{ticketType.STORY}}</option>
+            <option value="{{ticketType.EPIC}}">{{ticketType.EPIC}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ticketPriority">Ticket priority:</label>
+          <select [(ngModel)]="ticket.priority" class="form-control" id="ticketPriority" name="ticketPriority">
+            <option value="{{priorities.BLOCKER}}">{{priorities.BLOCKER}}</option>
+            <option value="{{priorities.CRITICAL}}">{{priorities.CRITICAL}}</option>
+            <option value="{{priorities.MAJOR}}">{{priorities.MAJOR}}</option>
+            <option value="{{priorities.NORMAL}}">{{priorities.NORMAL}}</option>
+            <option value="{{priorities.LOW}}">{{priorities.LOW}}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea #description="ngModel" [(ngModel)]="ticket.description" class="form-control"
+                    id="description" maxlength="255" name="description"
+                    pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"
+                    placeholder="description" style="min-height: 6em;"></textarea>
+          <div *ngIf="description.dirty && description.invalid">
+            <small *ngIf="description.errors.maxlength" class="form-text text-danger">
+              Description can not be longer than 255 characters.
+            </small>
+            <small *ngIf="description.errors.pattern" class="form-text text-danger">
+              Description can only contain letters and digits.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="dueDate">Choose the due date: </label>
+          <input #dueDate="ngModel" [(ngModel)]="date" class="form-control"
+                 id="dueDate" min="{{currentDate}}" name="dueDate" placeholder="{{currentDate}}"
+                 required type="date">
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="dueDateTime">Choose the due time: </label>
+          <input [(ngModel)]="time" class="form-control"
+                 id="dueDateTime" name="dueDateTime" required type="time">
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="assignee">Choose assignee: </label>
+          <ng-autocomplete (selected)='selectAssignee($event)' [data]="users"
+                           [itemTemplate]="itemTemplate"
+                           [notFoundTemplate]="notFoundTemplate"
+                           [searchKeyword]="keywordAssignee"
+                           historyIdentifier="users"
+                           id="assignee"
+                           name="assignee"
+                           placeHolder="Enter assignee">
+          </ng-autocomplete>
+
+          <ng-template #itemTemplate let-item>
+            <a [innerHTML]="item.username"></a>
+          </ng-template>
+
+          <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="epic">Choose epic: </label>
+          <ng-autocomplete (selected)='selectEpic($event)' [data]="epics"
+                           [itemTemplate]="epicTemplate"
+                           [notFoundTemplate]="epicNotFoundTemplate"
+                           [searchKeyword]="keyword"
+                           historyIdentifier="epics"
+                           id="epic"
+                           name="epic"
+                           placeHolder="Enter Epic name">
+          </ng-autocomplete>
+
+          <ng-template #epicTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template #epicNotFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+        </div>
+
+        <button (click)="addTicket()" [disabled]="addTicketForm.form.invalid" class="btn btn-primary" type="button">
+          Add
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+</div>

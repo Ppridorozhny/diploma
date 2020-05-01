@@ -29,6 +29,8 @@ spring:
     log-request-details: true
   liquibase:
     change-log: classpath:db/liquibase/db.changelog-master.yaml
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
 
 ## App Properties
 jwt:
@@ -38,7 +40,7 @@ jwt:
 application:
   stackTraceEnabled: false
 date:
-  pattern: yyyy-MM-dd
+  pattern: yyyy-MM-dd HH:mm
 
 management:
   endpoints:

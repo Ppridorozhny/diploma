@@ -19,6 +19,8 @@ import {TicketComponent} from './ticket/ticket/ticket.component';
 import {TicketAddComponent} from './ticket/ticket.add/ticket.add.component';
 import {TicketEditComponent} from './ticket/ticket.edit/ticket.edit.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {TicketService} from "./service/ticket.service";
+import {AutocompleteLibModule} from "angular-ng-autocomplete";
 
 @NgModule({
   declarations: [
@@ -37,15 +39,17 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AutocompleteLibModule
   ],
   providers: [
     AuthGuard,
     AuthenticationService,
     UserService,
     AlertService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    TicketService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })
