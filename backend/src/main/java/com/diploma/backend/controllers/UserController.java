@@ -34,10 +34,10 @@ public class UserController {
         return mapper.map(userService.getAllUsers(), AppConstants.USER_SHORT_LIST_TYPE);
     }
 
-    @GetMapping("/{username}")
-    public UserShortDTO getUserByUsername(@PathVariable String username) {
-        log.debug("Get user with username {}", username);
-        return mapper.map(userService.getUserByUsername(username), UserShortDTO.class);
+    @GetMapping("/{userId}")
+    public UserShortDTO getUserById(@PathVariable Integer userId) {
+        log.debug("Get user with userId {}", userId);
+        return mapper.map(userService.getUserById(userId), UserShortDTO.class);
     }
 
 }

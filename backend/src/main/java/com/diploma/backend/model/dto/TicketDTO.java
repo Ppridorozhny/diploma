@@ -2,7 +2,6 @@ package com.diploma.backend.model.dto;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -46,20 +45,14 @@ public class TicketDTO {
     @NotNull
     private Date dueDate;
 
-    @EqualsAndHashCode.Exclude
-    private UserDTO assignee;
+    private Integer assigneeId;
 
     @NotNull
-    @EqualsAndHashCode.Exclude
-    private UserDTO reporter;
+    private Integer reporterId;
 
-    @EqualsAndHashCode.Exclude
-    private TicketDTO epic;
+    private Integer epicId;
 
     @EqualsAndHashCode.Exclude
     private List<String> label;
-
-    @EqualsAndHashCode.Exclude
-    private Set<TicketRelationDTO> relations;
 
 }
