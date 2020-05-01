@@ -68,7 +68,7 @@ CREATE TABLE pr_ticket
     epic_id       INTEGER,
     project_id    INTEGER,
     due_date      TIMESTAMP,
-    automated     BOOLEAN        NOT NULL DEFAULT FALSE,
+    series_id     VARCHAR(255),
 
     created_by    VARCHAR(255),
     created_when  TIMESTAMP,
@@ -125,6 +125,15 @@ CREATE TABLE pr_project
     modified_when TIMESTAMP
 );
 
+CREATE TABLE pr_run
+(
+    run_id            SERIAL PRIMARY KEY,
+    ticket_id         INTEGER NOT NULL,
+    series_id         VARCHAR(255) NOT NULL,
+    started_when      TIMESTAMP NOT NULL,
+    completed_when    TIMESTAMP
+);
+
 ALTER TABLE ONLY pr_user_role
     ADD CONSTRAINT fk_pr_user_role FOREIGN KEY (user_id) REFERENCES pr_user (user_id);
 ALTER TABLE ONLY pr_user_role
@@ -149,6 +158,9 @@ ALTER TABLE ONLY pr_label
 
 ALTER TABLE ONLY pr_comment
     ADD CONSTRAINT fk_pr_comment_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id);
+
+ALTER TABLE ONLY pr_run
+    ADD CONSTRAINT fk_pr_run_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id);
 
 INSERT INTO pr_role(name)
 VALUES ('USER');
