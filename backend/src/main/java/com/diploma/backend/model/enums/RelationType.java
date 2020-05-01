@@ -30,8 +30,7 @@ public enum RelationType {
     }
 
     @JsonValue
-    @Override
-    public String toString() {
+    public String getName() {
         return this.getKeyName();
     }
 }

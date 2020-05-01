@@ -29,8 +29,7 @@ public enum Priority {
     }
 
     @JsonValue
-    @Override
-    public String toString() {
+    public String getName() {
         return this.getKeyName();
     }
 }

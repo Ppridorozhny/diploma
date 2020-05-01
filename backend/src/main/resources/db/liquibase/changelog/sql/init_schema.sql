@@ -11,23 +11,23 @@ CREATE TYPE pr_ticket_type as ENUM (
     'TASK',
     'STORY',
     'EPIC',
-    'SUB-TASK'
+    'SUBTASK'
     );
 
 CREATE TYPE pr_resolution as ENUM (
     'UNRESOLVED',
     'FIXED',
-    'NOT A BUG',
-    'KNOWN ISSUE',
+    'NOT_A_BUG',
+    'KNOWN_ISSUE',
     'DUPLICATE',
-    'CANNOT REPRODUCE',
+    'CANNOT_REPRODUCE',
     'CANCELED'
     );
 
 CREATE TYPE pr_relation_type as ENUM (
-    'RELATES TO',
+    'RELATES_TO',
     'BLOCKS',
-    'BLOCKED BY',
+    'BLOCKED_BY',
     'DUPLICATES',
     'CHILD',
     'PARENT'

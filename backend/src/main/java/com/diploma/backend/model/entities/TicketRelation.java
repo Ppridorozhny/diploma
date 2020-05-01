@@ -13,7 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
 import com.diploma.backend.model.enums.RelationType;
+import com.diploma.backend.model.type.PostgresEnumType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,6 +29,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
 public class TicketRelation extends BaseAuditEntity {
 
     @Id
@@ -33,6 +38,7 @@ public class TicketRelation extends BaseAuditEntity {
     private Integer id;
 
     @NotNull
+    @Type(type = "pg_enum")
     @Enumerated(EnumType.STRING)
     private RelationType relationType;
 

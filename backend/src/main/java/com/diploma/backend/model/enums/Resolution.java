@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public enum Resolution {
 
-    RESOLVER("Resolved"),
+    FIXED("Fixed"),
     UNRESOLVED("Unresolved"),
     NOT_A_BUG("Not a bug"),
     KNOWN_ISSUE("Known Issue"),
@@ -31,8 +31,7 @@ public enum Resolution {
     }
 
     @JsonValue
-    @Override
-    public String toString() {
+    public String getName() {
         return this.getKeyName();
     }
 }
