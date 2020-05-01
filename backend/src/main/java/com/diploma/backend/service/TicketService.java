@@ -1,10 +1,11 @@
 package com.diploma.backend.service;
 
-import com.diploma.backend.model.entities.Ticket;
-
 import java.util.List;
 
+import com.diploma.backend.model.entities.Ticket;
+
 public interface TicketService {
+
     Ticket createTicket(Ticket ticket);
 
     Ticket updateTicket(Integer id, Ticket ticket);
@@ -14,4 +15,7 @@ public interface TicketService {
     void deleteTicket(Integer id);
 
     List<Ticket> getAllTickets();
+
+    List<Ticket> getTicketsByProjectId(Integer projectId);
+
 }

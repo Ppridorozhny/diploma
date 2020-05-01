@@ -1,5 +1,21 @@
 package com.diploma.backend.controllers;
 
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.diploma.backend.AppConstants;
 import com.diploma.backend.model.dto.TicketDTO;
 import com.diploma.backend.model.entities.Ticket;
@@ -7,13 +23,6 @@ import com.diploma.backend.service.TicketService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Api(tags = {"TicketController"})
 @Validated
@@ -29,6 +38,11 @@ public class TicketController {
     @GetMapping
     public List<TicketDTO> getAllTickets() {
         return mapper.map(ticketService.getAllTickets(), AppConstants.TICKET_LIST_TYPE);
+    }
+
+    @GetMapping("/{projectId}")
+    public List<TicketDTO> getTicketsByProjectId(@PathVariable Integer projectId) {
+        return mapper.map(ticketService.getTicketsByProjectId(projectId), AppConstants.TICKET_LIST_TYPE);
     }
 
     @GetMapping("/{id}")
