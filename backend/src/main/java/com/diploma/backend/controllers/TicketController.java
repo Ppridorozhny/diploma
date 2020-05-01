@@ -40,6 +40,11 @@ public class TicketController {
         return mapper.map(ticketService.getAllTickets(), AppConstants.TICKET_LIST_TYPE);
     }
 
+    @GetMapping("/epics")
+    public List<TicketDTO> getAllEpics() {
+        return mapper.map(ticketService.getAllTickets(), AppConstants.TICKET_LIST_TYPE);
+    }
+
     @GetMapping("/{projectId}")
     public List<TicketDTO> getTicketsByProjectId(@PathVariable Integer projectId) {
         return mapper.map(ticketService.getTicketsByProjectId(projectId), AppConstants.TICKET_LIST_TYPE);

@@ -16,6 +16,8 @@ public interface TicketService {
 
     List<Ticket> getAllTickets();
 
+    List<Ticket> getAllEpics();
+
     List<Ticket> getTicketsByProjectId(Integer projectId);
 
 }

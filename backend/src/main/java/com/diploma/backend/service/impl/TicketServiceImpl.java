@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.diploma.backend.error.exceptions.ResourceNotFoundException;
 import com.diploma.backend.model.entities.Ticket;
+import com.diploma.backend.model.enums.TicketType;
 import com.diploma.backend.repository.TicketRepository;
 import com.diploma.backend.service.TicketService;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,11 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public List<Ticket> getAllTickets() {
         return ticketRepository.findAll();
+    }
+
+    @Override
+    public List<Ticket> getAllEpics() {
+        return ticketRepository.getAllTicketByType(TicketType.EPIC);
     }
 
     @Override

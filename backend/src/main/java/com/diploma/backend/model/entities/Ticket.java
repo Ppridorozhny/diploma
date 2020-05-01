@@ -21,11 +21,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.validator.constraints.Length;
 
 import com.diploma.backend.model.enums.Priority;
 import com.diploma.backend.model.enums.Resolution;
 import com.diploma.backend.model.enums.TicketType;
+import com.diploma.backend.model.type.PostgresEnumType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,6 +40,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
 public class Ticket extends BaseAuditEntity {
 
     @Id
@@ -53,15 +57,18 @@ public class Ticket extends BaseAuditEntity {
     private String description;
 
     @NotNull
+    @Type(type = "pg_enum")
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
     @NotNull
+    @Type(type = "pg_enum")
     @Enumerated(EnumType.STRING)
     @Column(name = "type", updatable = false, nullable = false)
     private TicketType type;
 
     @NotNull
+    @Type(type = "pg_enum")
     @Enumerated(EnumType.STRING)
     private Resolution resolution;
 
