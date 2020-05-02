@@ -25,7 +25,7 @@ export class TicketAddComponent implements OnInit {
   users: User[] = [];
   currentDate: string;
   priorities: any = Priority;
-  ticketType: any = TicketType;
+  types: any = TicketType;
   time: string;
   date: string;
   keywordAssignee = 'username';

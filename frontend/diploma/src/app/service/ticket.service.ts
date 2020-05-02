@@ -19,4 +19,12 @@ export class TicketService {
     return this.http.post<Ticket>('/api/tickets', ticket);
   }
 
+  update(ticket: Ticket) {
+    return this.http.put<Ticket>('/api/tickets/' + ticket.id, ticket);
+  }
+
+  getTicketById(id: number) {
+    return this.http.get<Ticket>('api/tickets/' + id);
+  }
+
 }

@@ -31,7 +31,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public Ticket updateTicket(Integer id, Ticket ticket) {
         Ticket ticketFromCache = ticketRepository.getOne(id);
-        BeanUtils.copyProperties(ticket, ticketFromCache, "id", "type", "reporter",
+        BeanUtils.copyProperties(ticket, ticketFromCache, "id", "reporter",
                 "relations");
         return ticketRepository.save(ticketFromCache);
     }
