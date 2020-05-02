@@ -27,6 +27,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.diploma.backend.model.enums.Priority;
 import com.diploma.backend.model.enums.Resolution;
+import com.diploma.backend.model.enums.Status;
 import com.diploma.backend.model.enums.TicketType;
 import com.diploma.backend.model.type.PostgresEnumType;
 import lombok.AllArgsConstructor;
@@ -60,6 +61,11 @@ public class Ticket extends BaseAuditEntity {
     @Type(type = "pg_enum")
     @Enumerated(EnumType.STRING)
     private Priority priority;
+
+    @NotNull
+    @Type(type = "pg_enum")
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @NotNull
     @Type(type = "pg_enum")

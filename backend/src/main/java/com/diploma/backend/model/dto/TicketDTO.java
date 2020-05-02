@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.diploma.backend.model.enums.Priority;
 import com.diploma.backend.model.enums.Resolution;
+import com.diploma.backend.model.enums.Status;
 import com.diploma.backend.model.enums.TicketType;
 import com.diploma.backend.validation.Groups;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,9 @@ public class TicketDTO {
 
     @NotNull
     private TicketType type;
+
+    @NotNull
+    private Status status;
 
     @NotNull
     private Resolution resolution;

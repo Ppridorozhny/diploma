@@ -33,6 +33,16 @@ CREATE TYPE pr_relation_type as ENUM (
     'PARENT'
     );
 
+CREATE TYPE pr_status as ENUM (
+    'OPEN',
+    'IN_ASSESSMENT',
+    'ASSESSED',
+    'IN_PROGRESS',
+    'IMPLEMENTED',
+    'READY_FOR_TESTING',
+    'CLOSED'
+    );
+
 CREATE TABLE pr_user
 (
     user_id    SERIAL PRIMARY KEY,
@@ -63,6 +73,7 @@ CREATE TABLE pr_ticket
     assignee_id   INTEGER,
     priority      pr_priority    NOT NULL,
     type          pr_ticket_type NOT NULL,
+    status        pr_status      NOT NULL,
     reporter_id   INTEGER        NOT NULL,
     resolution    pr_resolution  NOT NULL,
     epic_id       INTEGER,

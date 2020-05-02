@@ -1,6 +1,7 @@
 import {Priority} from "./priority";
 import {TicketType} from "./ticket.type";
 import {Resolution} from "./resolution";
+import {Status} from "./status";
 
 export class Ticket {
   id: number;
@@ -8,6 +9,7 @@ export class Ticket {
   description: string;
   priority: Priority;
   type: TicketType;
+  status: Status;
   resolution: Resolution;
   dueDate: string;
   assigneeId: number;
