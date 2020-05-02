@@ -14,6 +14,7 @@ DROP TYPE IF EXISTS pr_priority;
 DROP TYPE IF EXISTS pr_ticket_type;
 DROP TYPE IF EXISTS pr_resolution;
 DROP TYPE IF EXISTS pr_relation_type;
+DROP TYPE IF EXISTS pr_status;
 
 DROP INDEX IF EXISTS pr_run_series_id;
 DROP INDEX IF EXISTS pr_project_name;

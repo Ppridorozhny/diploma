@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import {HomeComponent} from "./home/home.component";
+import {LoginComponent} from "./components/login/login.component";
+import {HomeComponent} from "./components/home/home.component";
 import {AuthGuard} from "./service/auth.guard";
-import {TicketAddComponent} from "./ticket/ticket.add/ticket.add.component";
-import {TicketComponent} from "./ticket/ticket/ticket.component";
-import {TicketEditComponent} from "./ticket/ticket.edit/ticket.edit.component";
+import {TicketAddComponent} from "./components/ticket/ticket.add/ticket.add.component";
+import {TicketComponent} from "./components/ticket/ticket/ticket.component";
+import {TicketEditComponent} from "./components/ticket/ticket.edit/ticket.edit.component";
 
 
 const routes: Routes = [

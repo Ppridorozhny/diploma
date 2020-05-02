@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
-import {AlertService} from "../../service/alert.service";
-import {Ticket} from "../../model/ticket";
-import {UserService} from "../../service/user.service";
-import {User} from "../../model/user";
+import {AlertService} from "../../../service/alert.service";
+import {Ticket} from "../../../model/ticket";
+import {UserService} from "../../../service/user.service";
+import {User} from "../../../model/user";
 import {first} from "rxjs/operators";
-import {TicketService} from "../../service/ticket.service";
-import {Priority} from "../../model/priority";
-import {TicketType} from "../../model/ticket.type";
-import {Resolution} from "../../model/resolution";
+import {TicketService} from "../../../service/ticket.service";
+import {Priority} from "../../../model/priority";
+import {TicketType} from "../../../model/ticket.type";
+import {Resolution} from "../../../model/resolution";
+import {Status} from "../../../model/status";
 
 @Component({
   selector: 'app-ticket.add',
@@ -81,6 +82,7 @@ export class TicketAddComponent implements OnInit {
     this.ticket.assigneeId = null;
     this.ticket.reporterId = JSON.parse(localStorage.currentUser).id;
     this.ticket.epicId = null;
+    this.ticket.status = Status.OPEN;
     this.ticket.labels = [];
   }
 
