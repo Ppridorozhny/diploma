@@ -21,6 +21,8 @@ import {TicketEditComponent} from './components/ticket/ticket.edit/ticket.edit.c
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {TicketService} from "./service/ticket.service";
 import {AutocompleteLibModule} from "angular-ng-autocomplete";
+import {CommentListComponent} from "./components/ticket/ticket/comment-list/comment-list.component";
+import {CommentService} from "./service/comment.service";
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import {AutocompleteLibModule} from "angular-ng-autocomplete";
     TicketComponent,
     TicketAddComponent,
     TicketEditComponent,
+    CommentListComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +51,7 @@ import {AutocompleteLibModule} from "angular-ng-autocomplete";
     UserService,
     AlertService,
     TicketService,
+    CommentService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

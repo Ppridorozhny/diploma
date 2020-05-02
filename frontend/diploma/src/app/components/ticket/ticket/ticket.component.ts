@@ -8,6 +8,9 @@ import {Ticket} from "../../../model/ticket";
 import {first} from "rxjs/operators";
 import {User} from "../../../model/user";
 import {Resolution} from "../../../model/resolution";
+import {FormControl} from "@angular/forms";
+import {Commentt} from "../../../model/commentt";
+import {CommentService} from "../../../service/comment.service";
 
 @Component({
   selector: 'app-ticket',
@@ -25,13 +28,17 @@ export class TicketComponent implements OnInit {
   date: string;
   resolutions: any = Resolution;
   epic: Ticket;
+  commentControl = new FormControl();
+  isSubmitting = false;
+  comments: Commentt[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private spinner: NgxSpinnerService,
               private alertService: AlertService,
               private userService: UserService,
-              private ticketService: TicketService
+              private ticketService: TicketService,
+              private commentService: CommentService
   ) {
   }
 
@@ -46,6 +53,13 @@ export class TicketComponent implements OnInit {
     });
 
     this.getTicket();
+    this.commentService.getAllByTicketId(this.ticketId)
+      .pipe(first())
+      .subscribe(comments => {
+        this.comments = comments;
+      }, () => {
+        this.alertService.error("Cannot get comments")
+      })
 
     this.spinner.hide();
   }
@@ -65,10 +79,50 @@ export class TicketComponent implements OnInit {
             .subscribe(user => this.reporter = user);
           if (ticket.epicId) {
             this.ticketService.getTicketById(ticket.epicId).pipe(first())
-              .subscribe(ticket => this.epic = ticket)
+              .subscribe(epic => this.epic = epic)
           }
         },
         () => this.alertService.error('Cannot load the ticket'));
+  }
+
+  addComment() {
+    this.isSubmitting = true;
+
+    const commentBody = this.commentControl.value;
+    let createdComment = new Commentt();
+    createdComment.text = commentBody;
+    createdComment.ticketId = this.ticket.id;
+    this.spinner.show();
+    this.commentService
+      .create(createdComment)
+      .pipe(first())
+      .subscribe(
+        comment => {
+          console.log(createdComment);
+          console.log(comment);
+          this.comments.unshift(comment);
+          this.commentControl.reset('');
+        },
+        () => {
+          this.alertService.error('Adding comment failed', 'Posting' +
+            ' comment error');
+        }
+      );
+    this.spinner.hide();
+    this.isSubmitting = false;
+  }
+
+  onDeleteComment(commentId: number) {
+    this.commentService.delete(commentId)
+      .pipe(first())
+      .subscribe(
+        () => {
+          this.comments = this.comments.filter(comment => comment.id !== commentId);
+          this.alertService.success("Comment removed successfully")
+        }, () => {
+          this.alertService.error("Error during comment deleting")
+        }
+      );
   }
 
 }

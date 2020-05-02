@@ -10,6 +10,10 @@
 
       <div class="row">
 
+        <div class="py-4 d-flex justify-content-between flex-wrap align-items-center">
+          <h2>Ticket Info</h2>
+        </div>
+
         <div class="col-md-12">
 
           <ul class="list-group">
@@ -54,8 +58,33 @@
         </div>
       </div>
 
+      <br><br>
+      <div class="row">
 
+        <div class="col-md-12">
+          <div class="form-group purple-border">
+            <form (ngSubmit)="addComment()">
+              <textarea [formControl]="commentControl" class="form-control" maxlength="100"
+                        name="comment"
+                        placeholder="What do you think about that ticket?" rows="3"></textarea>
+              <button [disabled]="commentControl.invalid || isSubmitting" class="btn btn-success green offset-md-10"
+                      style="margin-top: 10px" type="submit"><i
+                class="fa fa-share"></i> Share
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div *ngIf="comments" class="col-10 offset-md-1">
+          <comment-list
+            (deleteComment)="onDeleteComment(comment.id)"
+            *ngFor="let comment of comments"
+            [comment]="comment">
+          </comment-list>
+        </div>
+
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>

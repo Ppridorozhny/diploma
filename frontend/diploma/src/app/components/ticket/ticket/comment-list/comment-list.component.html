@@ -1,0 +1,39 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      type="text/css">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card-comment">
+        <div class="panel panel-white post panel-shadow">
+          <div class="row">
+            <div class="col-10">
+              <div class="post-heading">
+                <div class="pull-left image">
+                  <img alt="user profile image" class="img-circle avatar" src="assets/avatar-default.jpg">
+                </div>
+                <div class="pull-left meta">
+                  <div class="title h5">
+                    <a href="{{comment.createdBy}}/profile">{{comment.createdBy}}</a>
+                  </div>
+                  <h6 class="text-muted time">{{comment.createdWhen | date:'medium'}} </h6>
+                </div>
+              </div>
+              <div class="post-description">
+                <div class="form-group purple-border">
+                  <textarea class="form-control" id="exampleFormControlTextarea4" readonly
+                            rows="3" style="resize: none">{{comment.text}}</textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-2">
+              <button (click)="deleteClicked()" *ngIf="comment.createdBy==username" aria-label="Delete" class="close">
+                <span aria-hidden="true" style="margin-right: 10px;">&times;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.modelmapper.TypeToken;
 
+import com.diploma.backend.model.dto.CommentDTO;
 import com.diploma.backend.model.dto.ProjectDTO;
 import com.diploma.backend.model.dto.RunDTO;
 import com.diploma.backend.model.dto.TicketDTO;
@@ -22,6 +23,9 @@ public class AppConstants {
     }).getType();
 
     public static final Type PROJECT_LIST_TYPE = (new TypeToken<List<ProjectDTO>>() {
+    }).getType();
+
+    public static final Type COMMENT_LIST_TYPE = (new TypeToken<List<CommentDTO>>() {
     }).getType();
 
     public static final String ROLE_USER = "USER";
