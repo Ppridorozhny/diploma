@@ -1,1 +1,61 @@
-<p>ticket works!</p>
+<div class="container-fluid" style="margin-top:20px">
+  <ngx-spinner bdColor="#333"
+               bdOpacity=0.9
+               color="#fff"
+               size="default"
+               type="ball-beat"></ngx-spinner>
+
+  <div>
+    <div *ngIf="ticket" class="container justify-content-center">
+
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <ul class="list-group">
+            <li class="list-group-item active justify-content-between d-flex">
+              <span>{{ticket.name}}</span>
+              <!--              <div *ngIf="eventt.ownerId === this.currentUserId" style="cursor: pointer;">-->
+              <!--                <img src="assets/edit.svg" (click)="editEvent()" height="30"-->
+              <!--                     width="30"/>-->
+              <!--              </div>-->
+            </li>
+            <li class="list-group-item">Priority: {{ticket.priority}}</li>
+            <li class="list-group-item">Type: {{ticket.type}}</li>
+            <li class="list-group-item">Status: {{ticket.status}}</li>
+            <li *ngIf="ticket.resolution != resolutions.UNRESOLVED" class="list-group-item">Resolution</li>
+            <li class="list-group-item">Description: {{ticket.description}}</li>
+            <li class="list-group-item">Due date: {{ticket.dueDate}}</li>
+            <li *ngIf="epic" class="list-group-item">Epic:
+              <a href="project/{{projectId}}/ticket/{{ticket.epicId}}">{{epic.name}}</a>
+            </li>
+            <li *ngIf="assignee" class="list-group-item"> Assignee: {{assignee.username}} : {{assignee.firstName}}
+              {{assignee.lastName}}
+              <!--              <a href="#/{{ownerLogin}}/profile">{{ownerLogin}}</a>-->
+            </li>
+            <li *ngIf="reporter" class="list-group-item"> Reporter: {{reporter.username}} : {{reporter.firstName}}
+              {{reporter.lastName}}
+              <!--              <a href="#/{{ownerLogin}}/profile">{{ownerLogin}}</a>-->
+            </li>
+            <li *ngIf="this.ticket.labels" class="list-group-item">
+              <div class="container">
+                <div class="row">
+                  <label class="form-control-label" for="ticketLabels">Labels: </label>
+                  <div *ngFor="let label of ticket.labels" id="ticketLabels">
+                    <a class="badge badge-info" style="margin-right: 5px; color: white;">
+                      #{{ label }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
