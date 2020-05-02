@@ -6,6 +6,8 @@ debug: true
 logging:
   level:
     com: debug
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
 
 # Hibernate ddl auto (create, create-drop, validate, update)
 spring:

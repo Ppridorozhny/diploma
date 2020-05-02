@@ -127,6 +127,35 @@
           </ng-template>
         </div>
 
+        <div class="form-group">
+          <label class="form-control-label" for="ticketLabels">Labels:</label>
+          <input #ticketLabel="ngModel" (keyup.enter)="addLabel()" [(ngModel)]="label" class="form-control"
+                 id="ticketLabels" maxlength="30" minlength="3"
+                 name="ticketLabels" pattern="^[_A-Za-z0-9]*$"
+                 placeholder="Enter label name and push 'Enter'" type="text">
+          <div *ngIf="ticketLabel.dirty && ticketLabel.invalid">
+            <small *ngIf="ticketLabel.errors.minlength" class="form-text text-danger">
+              Label name must more than 2 chars.
+            </small>
+            <small *ngIf="ticketLabel.errors.maxlength" class="form-text text-danger">
+              Label name must less than 31 chars.
+            </small>
+            <small *ngIf="ticketLabel.errors.pattern" class="form-text text-danger">
+              Label name can only contain letters, digits and '_'.
+            </small>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div *ngFor="let label of ticket.labels">
+              <a class="badge badge-info" style="margin-right: 5px; color: white;">
+                #{{ label }} <span (click)="deleteLabel(label)" class="tag-glyphicon tag-glyphicon-delete"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <button (click)="addTicket()" [disabled]="addTicketForm.form.invalid" class="btn btn-primary" type="button">
           Add
         </button>

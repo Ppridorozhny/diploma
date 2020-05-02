@@ -57,6 +57,6 @@ public class TicketDTO {
     private Integer epicId;
 
     @EqualsAndHashCode.Exclude
-    private List<String> label;
+    private List<String> labels;
 
 }

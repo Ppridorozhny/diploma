@@ -31,6 +31,7 @@ export class TicketAddComponent implements OnInit {
   keywordAssignee = 'username';
   keyword = 'name';
   epics: Ticket[] = [];
+  label: string;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -124,6 +125,23 @@ export class TicketAddComponent implements OnInit {
 
   selectEpic(epic: Ticket) {
     this.ticket.epicId = epic.id;
+  }
+
+  addLabel() {
+    if (this.label.length > 2 && this.label.length < 31 && /^[_A-Za-z0-9]*$/.test(this.label)) {
+
+      this.ticket.labels.push(this.label);
+
+      this.label = '';
+    }
+  }
+
+  deleteLabel(label: string) {
+    const index = this.ticket.labels.indexOf(label);
+    console.log(index);
+    if (index !== -1) {
+      this.ticket.labels.splice(index, 1)
+    }
   }
 
 }

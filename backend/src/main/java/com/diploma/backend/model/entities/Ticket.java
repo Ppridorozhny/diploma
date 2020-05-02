@@ -70,7 +70,7 @@ public class Ticket extends BaseAuditEntity {
     @NotNull
     @Type(type = "pg_enum")
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", updatable = false, nullable = false)
+    @Column(name = "type", nullable = false)
     private TicketType type;
 
     @NotNull
@@ -90,10 +90,10 @@ public class Ticket extends BaseAuditEntity {
     private Integer epicId;
 
     @ElementCollection
-    @CollectionTable(name = "pr_label", joinColumns = @JoinColumn(name = "label_id"))
+    @CollectionTable(name = "pr_label", joinColumns = @JoinColumn(name = "ticket_id"))
     @Column(name = "name")
     @EqualsAndHashCode.Exclude
-    private List<String> label;
+    private List<String> labels;
 
     @OneToMany(mappedBy = "source")
     @EqualsAndHashCode.Exclude
