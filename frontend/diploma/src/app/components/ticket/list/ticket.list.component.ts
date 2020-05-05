@@ -18,6 +18,7 @@ export class TicketListComponent implements OnInit {
   tickets: Ticket[] = [];
   projectId: number;
   profile: User;
+  keyword = 'name';
   queryField: FormControl = new FormControl();
 
   page: number = 1;
@@ -100,17 +101,13 @@ export class TicketListComponent implements OnInit {
   }
 
   changeSort(data: any, config: any): any {
-    console.log("sorting");
     if (!config.sorting) {
-      console.log("not sort")
       return data;
     }
 
     let columns = this.config.sorting.columns || [];
     let columnName: string = void 0;
     let sort: string = void 0;
-
-    console.log(this.config.sorting.columns);
 
     for (let i = 0; i < columns.length; i++) {
       if (columns[i].sort !== '' && columns[i].sort !== false && columns[i].sort !== null) {
@@ -192,7 +189,6 @@ export class TicketListComponent implements OnInit {
   }
 
   onCellClick(data: any): any {
-    console.log(data.row);
     this.openTicket(data.row);
   }
 

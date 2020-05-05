@@ -9,18 +9,30 @@
 
         <div class="col-md-4">
           <section>
-            <input [formControl]="queryField" class="form-control mb-4"
-                   placeholder="Search for tickets by name" type="text"/>
-            <ul *ngIf="queryField.value">
-              <li *ngFor="let ticket of tickets" class="filter-select-list">
-                <p (click)="openTicket(ticket)">{{ticket.name}}</p>
-              </li>
-            </ul>
+            <label class="form-control-label" for="tickets">Search ticket by name: </label>
+            <ng-autocomplete (selected)='openTicket($event)' [data]="tickets"
+                             [itemTemplate]="itemTemplate"
+                             [notFoundTemplate]="notFoundTemplate"
+                             [searchKeyword]="keyword"
+                             historyIdentifier="tickets"
+                             id="tickets"
+                             placeHolder="Enter Ticket name">
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
           </section>
 
+          <label class="form-control-label" for="fields">Search ticket by all fields: </label>
           <input (tableChanged)="onChangeTable(config)" *ngIf="config.filtering"
                  [ngTableFiltering]="config.filtering"
                  class="form-control"
+                 id="fields"
                  placeholder="Filter all columns"/>
         </div>
       </div>

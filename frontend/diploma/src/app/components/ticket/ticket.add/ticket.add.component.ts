@@ -69,8 +69,6 @@ export class TicketAddComponent implements OnInit {
     this.ticketService.getAllEpics()
       .pipe(first())
       .subscribe(epics => this.epics = epics);
-
-    console.log(this.ticket);
   }
 
   resetTicket() {
@@ -138,7 +136,6 @@ export class TicketAddComponent implements OnInit {
 
   deleteLabel(label: string) {
     const index = this.ticket.labels.indexOf(label);
-    console.log(index);
     if (index !== -1) {
       this.ticket.labels.splice(index, 1)
     }

@@ -98,8 +98,6 @@ export class TicketComponent implements OnInit {
       .pipe(first())
       .subscribe(
         comment => {
-          console.log(createdComment);
-          console.log(comment);
           this.comments.unshift(comment);
           this.commentControl.reset('');
         },

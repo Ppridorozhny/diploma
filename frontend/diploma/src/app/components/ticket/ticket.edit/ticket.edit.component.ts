@@ -102,12 +102,10 @@ export class TicketEditComponent implements OnInit {
     this.ticketService.update(this.ticket).pipe(first())
       .subscribe(ticket => {
         this.alertService.success("Ticket was updated");
-        console.log(this.ticket);
         this.spinner.hide();
         this.redirectToTicket(ticket);
       }, () => {
         this.alertService.error('Update failed', 'Update error');
-        console.log(this.ticket);
         this.spinner.hide();
       });
   }
@@ -137,7 +135,6 @@ export class TicketEditComponent implements OnInit {
 
   deleteLabel(label: string) {
     const index = this.ticket.labels.indexOf(label);
-    console.log(index);
     if (index !== -1) {
       this.ticket.labels.splice(index, 1)
     }
