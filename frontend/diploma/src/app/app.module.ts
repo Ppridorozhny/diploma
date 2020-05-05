@@ -31,6 +31,7 @@ import {ProjectComponent} from "./components/project/project/project.component";
 import {ProjectAddComponent} from "./components/project/project.add/project.add.component";
 import {ProjectEditComponent} from "./components/project/project.edit/project.edit.component";
 import {ProjectListComponent} from "./components/project/list/project.list.component";
+import {ProjectService} from "./service/project.service";
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import {ProjectListComponent} from "./components/project/list/project.list.compo
     AlertService,
     TicketService,
     CommentService,
+    ProjectService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
