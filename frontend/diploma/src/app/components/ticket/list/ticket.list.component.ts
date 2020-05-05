@@ -34,7 +34,7 @@ export class TicketListComponent implements OnInit {
     paging: true,
     sorting: {columns: TICKET_COLUMNS},
     filtering: {filterString: ''},
-    className: ['table-striped', 'table-bordered']
+    className: ['table-striped', 'table-bordered', 'table-hover', 'table-info']
   };
 
   constructor(private ticketService: TicketService,
