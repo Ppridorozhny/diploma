@@ -81,7 +81,7 @@
 
         <div class="form-group">
           <label class="form-control-label" for="assignee">Choose assignee: </label>
-          <ng-autocomplete (selected)='selectAssignee($Ticket)' [data]="users"
+          <ng-autocomplete (selected)='selectAssignee($event)' [data]="users"
                            [itemTemplate]="itemTemplate"
                            [notFoundTemplate]="notFoundTemplate"
                            [searchKeyword]="keywordAssignee"
@@ -102,7 +102,7 @@
 
         <div class="form-group">
           <label class="form-control-label" for="epic">Choose epic: </label>
-          <ng-autocomplete (selected)='selectEpic($Ticket)' [data]="epics"
+          <ng-autocomplete (selected)='selectEpic($event)' [data]="epics"
                            [itemTemplate]="epicTemplate"
                            [notFoundTemplate]="epicNotFoundTemplate"
                            [searchKeyword]="keyword"
