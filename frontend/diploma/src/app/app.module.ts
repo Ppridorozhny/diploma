@@ -30,6 +30,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {ProjectComponent} from "./components/project/project/project.component";
 import {ProjectAddComponent} from "./components/project/project.add/project.add.component";
 import {ProjectEditComponent} from "./components/project/project.edit/project.edit.component";
+import {ProjectListComponent} from "./components/project/list/project.list.component";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {ProjectEditComponent} from "./components/project/project.edit/project.ed
     TicketListComponent,
     ProjectAddComponent,
     ProjectComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,60 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      type="text/css">
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-12 py-4">
+      <h1 class="mb-4">Your Projects:</h1>
+      <div class="row">
+
+        <div class="col-md-4">
+          <section>
+            <label class="form-control-label" for="tickets">Search project by name: </label>
+            <ng-autocomplete (selected)='openProject($event)' [data]="projects"
+                             [itemTemplate]="itemTemplate"
+                             [notFoundTemplate]="notFoundTemplate"
+                             [searchKeyword]="keyword"
+                             historyIdentifier="tickets"
+                             id="tickets"
+                             placeHolder="Enter Ticket name">
+            </ng-autocomplete>
+
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template>
+          </section>
+
+          <label class="form-control-label" for="fields">Search project by all fields: </label>
+          <input (tableChanged)="onChangeTable(config)" *ngIf="config.filtering"
+                 [ngTableFiltering]="config.filtering"
+                 class="form-control"
+                 id="fields"
+                 placeholder="Filter all columns"/>
+        </div>
+      </div>
+      <br>
+      <ng-table (cellClicked)="onCellClick($event)"
+                (tableChanged)="onChangeTable(config)"
+                [columns]="columns"
+                [config]="config" [rows]="rows"
+                class="test">
+      </ng-table>
+      <pagination (numPages)="numPages = $event"
+                  (pageChanged)="onChangeTable(config, $event)"
+                  *ngIf="config.paging"
+                  [(ngModel)]="page"
+                  [boundaryLinks]="true"
+                  [itemsPerPage]="itemsPerPage"
+                  [maxSize]="maxSize"
+                  [rotate]="false"
+                  [totalItems]="length"
+                  class="pagination-sm">
+      </pagination>
+      <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
+    </div>
+  </div>
+</div>

@@ -10,10 +10,12 @@ import {TicketListComponent} from "./components/ticket/list/ticket.list.componen
 import {ProjectComponent} from "./components/project/project/project.component";
 import {ProjectAddComponent} from "./components/project/project.add/project.add.component";
 import {ProjectEditComponent} from "./components/project/project.edit/project.edit.component";
+import {ProjectListComponent} from "./components/project/list/project.list.component";
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'project', component: ProjectListComponent, canActivate: [AuthGuard]},
   {path: 'project/create', component: ProjectAddComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId', component: ProjectComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
