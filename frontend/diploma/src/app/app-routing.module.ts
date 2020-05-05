@@ -6,6 +6,7 @@ import {AuthGuard} from "./service/auth.guard";
 import {TicketAddComponent} from "./components/ticket/ticket.add/ticket.add.component";
 import {TicketComponent} from "./components/ticket/ticket/ticket.component";
 import {TicketEditComponent} from "./components/ticket/ticket.edit/ticket.edit.component";
+import {TicketListComponent} from "./components/ticket/list/ticket.list.component";
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'project/:projectId/ticket/create', component: TicketAddComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/:ticketId', component: TicketComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/:ticketId/edit', component: TicketEditComponent, canActivate: [AuthGuard]},
+  {path: 'project/:projectId/ticket', component: TicketListComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
 
   // redirect to home

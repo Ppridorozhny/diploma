@@ -23,6 +23,10 @@ import {TicketService} from "./service/ticket.service";
 import {AutocompleteLibModule} from "angular-ng-autocomplete";
 import {CommentListComponent} from "./components/ticket/ticket/comment-list/comment-list.component";
 import {CommentService} from "./service/comment.service";
+import {TicketListComponent} from "./components/ticket/list/ticket.list.component";
+import {Ng2TableModule} from "ng2-table/ng2-table";
+import {PaginationModule} from "ngx-bootstrap/pagination";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import {CommentService} from "./service/comment.service";
     TicketAddComponent,
     TicketEditComponent,
     CommentListComponent,
+    TicketListComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +48,10 @@ import {CommentService} from "./service/comment.service";
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    Ng2TableModule,
+    PaginationModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [
     AuthGuard,
