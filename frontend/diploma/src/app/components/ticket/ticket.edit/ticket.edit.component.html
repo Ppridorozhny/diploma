@@ -2,7 +2,7 @@
   <div class="col-8">
     <div class="container justify-content-center">
 
-      <form #addTicketForm="ngForm" name="form" role="form">
+      <form #editTicketForm="ngForm" name="form" role="form">
 
         <div class="py-4 d-flex justify-content-between flex-wrap align-items-center">
           <h2>Edit ticket</h2>
@@ -15,16 +15,16 @@
                  pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$" placeholder="name" required type="text"/>
           <div *ngIf="name.dirty && name.invalid">
             <small *ngIf="name.errors.required" class="form-text text-danger">
-              Event name is required.
+              Ticket name is required.
             </small>
             <small *ngIf="name.errors.minlength" class="form-text text-danger">
-              Event name is required to be at least 4 character.
+              Ticket name is required to be at least 4 character.
             </small>
             <small *ngIf="name.errors.maxlength" class="form-text text-danger">
-              Event name cannot be longer than 100 characters.
+              Ticket name cannot be longer than 100 characters.
             </small>
             <small *ngIf="name.errors.pattern" class="form-text text-danger">
-              Event name can only contain letters and digits.
+              Ticket name can only contain letters and digits.
             </small>
           </div>
         </div>
@@ -81,7 +81,7 @@
 
         <div class="form-group">
           <label class="form-control-label" for="assignee">Choose assignee: </label>
-          <ng-autocomplete (selected)='selectAssignee($event)' [data]="users"
+          <ng-autocomplete (selected)='selectAssignee($Ticket)' [data]="users"
                            [itemTemplate]="itemTemplate"
                            [notFoundTemplate]="notFoundTemplate"
                            [searchKeyword]="keywordAssignee"
@@ -102,7 +102,7 @@
 
         <div class="form-group">
           <label class="form-control-label" for="epic">Choose epic: </label>
-          <ng-autocomplete (selected)='selectEpic($event)' [data]="epics"
+          <ng-autocomplete (selected)='selectEpic($Ticket)' [data]="epics"
                            [itemTemplate]="epicTemplate"
                            [notFoundTemplate]="epicNotFoundTemplate"
                            [searchKeyword]="keyword"
@@ -150,7 +150,7 @@
           </div>
         </div>
 
-        <button (click)="updateTicket()" [disabled]="addTicketForm.form.invalid" class="btn btn-primary" type="button">
+        <button (click)="updateTicket()" [disabled]="editTicketForm.form.invalid" class="btn btn-primary" type="button">
           Update
         </button>
 

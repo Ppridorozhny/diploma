@@ -1,0 +1,56 @@
+<div class="container-fluid" style="margin-top:20px">
+  <div class="col-8">
+    <div class="container justify-content-center">
+
+      <form #addProjectForm="ngForm" name="form" role="form">
+
+        <div class="py-4 d-flex justify-content-between flex-wrap align-items-center">
+          <h2>Add ticket</h2>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input #name="ngModel" [(ngModel)]="project.name" class="form-control"
+                 id="name" maxlength="100" minlength="4" name="name"
+                 pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$" placeholder="name" required type="text"/>
+          <div *ngIf="name.dirty && name.invalid">
+            <small *ngIf="name.errors.required" class="form-text text-danger">
+              Project name is required.
+            </small>
+            <small *ngIf="name.errors.minlength" class="form-text text-danger">
+              Project name is required to be at least 4 character.
+            </small>
+            <small *ngIf="name.errors.maxlength" class="form-text text-danger">
+              Project name cannot be longer than 100 characters.
+            </small>
+            <small *ngIf="name.errors.pattern" class="form-text text-danger">
+              Project name can only contain letters and digits.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea #description="ngModel" [(ngModel)]="project.description" class="form-control"
+                    id="description" maxlength="255" name="description"
+                    pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$"
+                    placeholder="description" style="min-height: 6em;"></textarea>
+          <div *ngIf="description.dirty && description.invalid">
+            <small *ngIf="description.errors.maxlength" class="form-text text-danger">
+              Description can not be longer than 255 characters.
+            </small>
+            <small *ngIf="description.errors.pattern" class="form-text text-danger">
+              Description can only contain letters and digits.
+            </small>
+          </div>
+        </div>
+
+        <button (click)="addProject()" [disabled]="addProjectForm.form.invalid" class="btn btn-primary" type="button">
+          Add
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+</div>

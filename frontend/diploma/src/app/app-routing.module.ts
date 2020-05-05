@@ -7,10 +7,16 @@ import {TicketAddComponent} from "./components/ticket/ticket.add/ticket.add.comp
 import {TicketComponent} from "./components/ticket/ticket/ticket.component";
 import {TicketEditComponent} from "./components/ticket/ticket.edit/ticket.edit.component";
 import {TicketListComponent} from "./components/ticket/list/ticket.list.component";
+import {ProjectComponent} from "./components/project/project/project.component";
+import {ProjectAddComponent} from "./components/project/project.add/project.add.component";
+import {ProjectEditComponent} from "./components/project/project.edit/project.edit.component";
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'project/create', component: ProjectAddComponent, canActivate: [AuthGuard]},
+  {path: 'project/:projectId', component: ProjectComponent, canActivate: [AuthGuard]},
+  {path: 'project/:projectId/edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/create', component: TicketAddComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/:ticketId', component: TicketComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/:ticketId/edit', component: TicketEditComponent, canActivate: [AuthGuard]},

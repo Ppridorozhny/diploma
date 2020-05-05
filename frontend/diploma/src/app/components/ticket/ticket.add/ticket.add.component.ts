@@ -45,6 +45,8 @@ export class TicketAddComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
 
+    console.log('ticket')
+
     this.ticket = new Ticket();
     this.route.params.subscribe(params => {
       this.projectId = params['projectId'];

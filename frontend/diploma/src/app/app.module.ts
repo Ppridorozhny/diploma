@@ -27,6 +27,9 @@ import {TicketListComponent} from "./components/ticket/list/ticket.list.componen
 import {Ng2TableModule} from "ng2-table/ng2-table";
 import {PaginationModule} from "ngx-bootstrap/pagination";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {ProjectComponent} from "./components/project/project/project.component";
+import {ProjectAddComponent} from "./components/project/project.add/project.add.component";
+import {ProjectEditComponent} from "./components/project/project.edit/project.edit.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +41,9 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     TicketEditComponent,
     CommentListComponent,
     TicketListComponent,
+    ProjectAddComponent,
+    ProjectComponent,
+    ProjectEditComponent
   ],
   imports: [
     BrowserModule,

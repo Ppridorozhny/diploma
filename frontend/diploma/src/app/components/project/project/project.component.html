@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <div>
+    <div *ngIf="project" class="container justify-content-center">
+
+      <div class="row">
+
+        <div class="py-4 d-flex justify-content-between flex-wrap align-items-center">
+          <h2>Project Info</h2>
+        </div>
+
+        <div class="col-md-12">
+
+          <ul class="list-group">
+            <li class="list-group-item active justify-content-between d-flex">
+              <span>{{project.name}}</span>
+              <!--              <div *ngIf="eventt.ownerId === this.currentUserId" style="cursor: pointer;">-->
+              <!--                <img src="assets/edit.svg" (click)="editEvent()" height="30"-->
+              <!--                     width="30"/>-->
+              <!--              </div>-->
+            </li>
+            <li class="list-group-item">Description: {{project.description}}</li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
