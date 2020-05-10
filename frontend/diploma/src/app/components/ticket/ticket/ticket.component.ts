@@ -160,4 +160,8 @@ export class TicketComponent implements OnInit {
       }, error => this.alertService.error(error));
   }
 
+  editTicket() {
+    this.router.navigate(["/project/" + this.projectId + "/ticket/" + this.ticketId + "/edit"]);
+  }
+
 }
