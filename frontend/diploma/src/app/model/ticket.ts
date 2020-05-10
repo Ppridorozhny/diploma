@@ -16,5 +16,6 @@ export class Ticket {
   reporterId: number;
   epicId: number;
   labels: string[];
+  projectId: number;
 
 }

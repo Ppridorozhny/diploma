@@ -32,6 +32,7 @@ import {ProjectAddComponent} from "./components/project/project.add/project.add.
 import {ProjectEditComponent} from "./components/project/project.edit/project.edit.component";
 import {ProjectListComponent} from "./components/project/list/project.list.component";
 import {ProjectService} from "./service/project.service";
+import {ProfileComponent} from "./components/profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {ProjectService} from "./service/project.service";
     ProjectAddComponent,
     ProjectComponent,
     ProjectEditComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,10 @@
 package com.diploma.backend.model.entities;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -39,9 +36,5 @@ public class Project extends BaseAuditEntity {
 
     @Length(max = 255)
     private String description;
-
-    @OneToMany(mappedBy = "project")
-    @EqualsAndHashCode.Exclude
-    private Set<Ticket> tickets;
 
 }

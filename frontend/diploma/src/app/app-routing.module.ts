@@ -11,6 +11,7 @@ import {ProjectComponent} from "./components/project/project/project.component";
 import {ProjectAddComponent} from "./components/project/project.add/project.add.component";
 import {ProjectEditComponent} from "./components/project/project.edit/project.edit.component";
 import {ProjectListComponent} from "./components/project/list/project.list.component";
+import {ProfileComponent} from "./components/profile/profile.component";
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'project/:projectId/ticket/:ticketId', component: TicketComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/:ticketId/edit', component: TicketEditComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket', component: TicketListComponent, canActivate: [AuthGuard]},
+  {path: 'profile/:username', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
 
   // redirect to home

@@ -85,6 +85,7 @@ export class TicketAddComponent implements OnInit {
     this.ticket.epicId = null;
     this.ticket.status = Status.OPEN;
     this.ticket.labels = [];
+    this.ticket.projectId = this.projectId;
   }
 
   formatDate() {

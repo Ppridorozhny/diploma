@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div *ngIf="profile" class="row">
+    <!--    <div class="col-2">-->
+    <!--      <home-comp [states]="state"></home-comp>-->
+    <!--    </div>-->
+
+
+    <div *ngIf="profile.username" class="col-10 py-4">
+      <div align="center">
+        <h3>{{profile.firstName}} {{profile.lastName}}</h3>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-4">
+          <div class="logo">
+            <img alt="profile-logo"
+                 class="profile-logo" src="../../../assets/avatar-default.jpg">
+          </div>
+        </div>
+        <div class="col-6 offset-2">
+          <table class="table table-info table-striped table-bordered">
+            <caption>Profile info</caption>
+            <tbody>
+            <tr>
+              <td>Username</td>
+              <td>{{profile.username}}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{profile.email}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br>
+      <div *ngIf="tickets" class="row">
+        <ul class="list-group tickets">
+          <li class="list-group-item active">Activity in tickets</li>
+          <li *ngFor="let ticket of tickets" class="list-group-item">
+            <div *ngIf="ticket.assigneeId === profile.id; then thenBlock; else elseBlock"></div>
+            <ng-template #elseBlock>Reporter for ticket</ng-template>
+            <ng-template #thenBlock>Assignee for ticket</ng-template>
+            <a href="project/{{ticket.projectId}}/ticket/{{ticket.id}}">{{ticket.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

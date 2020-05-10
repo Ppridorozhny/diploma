@@ -35,7 +35,7 @@
               {{reporter.lastName}}
               <!--              <a href="#/{{ownerLogin}}/profile">{{ownerLogin}}</a>-->
             </li>
-            <li *ngIf="this.ticket.labels" class="list-group-item">
+            <li *ngIf="this.ticket.labels && this.ticket.labels.length != 0" class="list-group-item">
               <div class="container">
                 <div class="row">
                   <label class="form-control-label" for="ticketLabels">Labels: </label>

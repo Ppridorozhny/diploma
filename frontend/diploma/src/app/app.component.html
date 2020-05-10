@@ -6,6 +6,7 @@
     </a>
     <div *ngIf="currentUser" class="navbar-nav navbar-collapse collapse w-100 order-3 dual-collapse2">
       <a class="nav-item nav-link" routerLink="/">Home</a>
+      <a class="nav-item nav-link" routerLink="/profile/{{currentUser.username}}">Profile</a>
       <a (click)="logout()" class="nav-item navbar-nav ml-auto nav-link" href="">Logout</a>
     </div>
   </nav>

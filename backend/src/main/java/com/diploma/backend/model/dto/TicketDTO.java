@@ -59,4 +59,7 @@ public class TicketDTO {
     @EqualsAndHashCode.Exclude
     private List<String> labels;
 
+    @NotNull
+    private Integer projectId;
+
 }
