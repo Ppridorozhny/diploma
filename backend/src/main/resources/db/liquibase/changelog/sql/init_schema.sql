@@ -160,18 +160,18 @@ ALTER TABLE ONLY pr_ticket
     ADD CONSTRAINT fk_pr_ticket_project FOREIGN KEY (project_id) REFERENCES pr_project (project_id);
 
 ALTER TABLE ONLY pr_ticket_relation
-    ADD CONSTRAINT fk_pr_ticket_relation_source FOREIGN KEY (source_id) REFERENCES pr_ticket (ticket_id);
+    ADD CONSTRAINT fk_pr_ticket_relation_source FOREIGN KEY (source_id) REFERENCES pr_ticket (ticket_id) ON DELETE CASCADE;
 ALTER TABLE ONLY pr_ticket_relation
-    ADD CONSTRAINT fk_pr_ticket_relation_related FOREIGN KEY (target_id) REFERENCES pr_ticket (ticket_id);
+    ADD CONSTRAINT fk_pr_ticket_relation_related FOREIGN KEY (target_id) REFERENCES pr_ticket (ticket_id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY pr_label
-    ADD CONSTRAINT fk_pr_label_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id);
+    ADD CONSTRAINT fk_pr_label_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY pr_comment
-    ADD CONSTRAINT fk_pr_comment_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id);
+    ADD CONSTRAINT fk_pr_comment_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id) ON DELETE CASCADE;
 
 ALTER TABLE ONLY pr_run
-    ADD CONSTRAINT fk_pr_run_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id);
+    ADD CONSTRAINT fk_pr_run_ticket FOREIGN KEY (ticket_id) REFERENCES pr_ticket (ticket_id) ON DELETE CASCADE;
 
 CREATE INDEX pr_run_series_id
     ON pr_run (series_id);

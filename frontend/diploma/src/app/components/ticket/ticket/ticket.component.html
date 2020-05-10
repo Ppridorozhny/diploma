@@ -59,6 +59,10 @@
           <button class="btn btn-primary" [disabled]="changeButtonDisabled"
                   (click)="changeStatus.show();">Change status
           </button>
+          <br><br>
+          <button class="btn btn-danger" [disabled]="ticket.status != 'Open'"
+                  (click)="deleteTicket();">Delete ticket
+          </button>
         </div>
 
       </div>

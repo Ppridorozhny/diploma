@@ -42,4 +42,8 @@ export class TicketService {
     return this.http.post<Ticket>('/api/tickets/change-status', changeStatus);
   }
 
+  delete(id: number) {
+    return this.http.delete<any>('api/tickets/' + id);
+  }
+
 }

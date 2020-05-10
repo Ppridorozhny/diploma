@@ -164,4 +164,16 @@ export class TicketComponent implements OnInit {
     this.router.navigate(["/project/" + this.projectId + "/ticket/" + this.ticketId + "/edit"]);
   }
 
+  deleteTicket() {
+    this.ticketService.delete(this.ticketId)
+      .pipe(first())
+      .subscribe(
+        () => {
+          this.router.navigate(["/project/" + this.projectId + "/ticket"]);
+          this.alertService.success("Ticket was deleted successfully");
+        }, e => {this.alertService.error(e);}
+      )
+
+  }
+
 }
