@@ -47,7 +47,7 @@ public class TicketController {
         return mapper.map(ticketService.getAllEpics(), AppConstants.TICKET_LIST_TYPE);
     }
 
-    @GetMapping("project/{projectId}")
+    @GetMapping("/project/{projectId}")
     public List<TicketDTO> getTicketsByProjectId(@PathVariable Integer projectId) {
         return mapper.map(ticketService.getTicketsByProjectId(projectId), AppConstants.TICKET_LIST_TYPE);
     }

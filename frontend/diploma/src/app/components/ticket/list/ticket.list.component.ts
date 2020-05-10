@@ -67,7 +67,7 @@ export class TicketListComponent implements OnInit {
       distinctUntilChanged()
     ).subscribe(queryField => {
       console.log(queryField);
-      this.ticketService.getAll().pipe(first())
+      this.ticketService.getAllByProjectId(this.projectId).pipe(first())
         .subscribe((tickets) => {
           this.tickets = tickets;
         }, error => {

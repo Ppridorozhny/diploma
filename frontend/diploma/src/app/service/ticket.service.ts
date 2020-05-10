@@ -13,6 +13,10 @@ export class TicketService {
     return this.http.get<Ticket[]>('api/tickets');
   }
 
+  getAllByProjectId(projectId: number) {
+    return this.http.get<Ticket[]>('api/tickets/project/' + projectId);
+  }
+
   getAllEpics() {
     return this.http.get<Ticket[]>('api/tickets/epics');
   }
