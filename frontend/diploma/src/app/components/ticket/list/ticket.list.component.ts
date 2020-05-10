@@ -15,6 +15,8 @@ import {TICKET_COLUMNS} from "./config/ticket.columns";
   styleUrls: ['./ticket.list.component.css'],
 })
 export class TicketListComponent implements OnInit {
+
+  state: string = "tickets";
   tickets: Ticket[] = [];
   projectId: number;
   profile: User;

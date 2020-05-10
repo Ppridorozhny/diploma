@@ -4,11 +4,15 @@
 
       <div class="row">
 
-        <div class="py-4 d-flex justify-content-between flex-wrap align-items-center">
-          <h2>Project Info</h2>
+        <div class="col-2 py-5">
+          <app-sidebar [states]="state" [projectId]="projectId"></app-sidebar>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-10">
+
+          <div class="py-3 d-flex justify-content-between flex-wrap align-items-center">
+            <h2>Project Info</h2>
+          </div>
 
           <ul class="list-group">
             <li class="list-group-item active justify-content-between d-flex">

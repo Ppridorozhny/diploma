@@ -19,6 +19,7 @@ import {CommentService} from "../../../service/comment.service";
 })
 export class TicketComponent implements OnInit {
 
+  state: string = "tickets";
   ticket: Ticket;
   projectId: number;
   ticketId: number;

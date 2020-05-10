@@ -13,6 +13,7 @@ import {ProjectService} from "../../../service/project.service";
 })
 export class ProjectComponent implements OnInit {
 
+  state: string = "project";
   project: Project;
   projectId: number;
 

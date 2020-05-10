@@ -3,58 +3,63 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div class="col-12 py-4">
-      <h1 class="mb-4">Your Tickets:</h1>
-      <div class="row">
-
-        <div class="col-md-4">
-          <section>
-            <label class="form-control-label" for="tickets">Search ticket by name: </label>
-            <ng-autocomplete (selected)='openTicket($event)' [data]="tickets"
-                             [itemTemplate]="itemTemplate"
-                             [notFoundTemplate]="notFoundTemplate"
-                             [searchKeyword]="keyword"
-                             historyIdentifier="tickets"
-                             id="tickets"
-                             placeHolder="Enter Ticket name">
-            </ng-autocomplete>
-
-            <ng-template #itemTemplate let-item>
-              <a [innerHTML]="item.name"></a>
-            </ng-template>
-
-            <ng-template #notFoundTemplate let-notFound>
-              <div [innerHTML]="notFound"></div>
-            </ng-template>
-          </section>
-
-          <label class="form-control-label" for="fields">Search ticket by all fields: </label>
-          <input (tableChanged)="onChangeTable(config)" *ngIf="config.filtering"
-                 [ngTableFiltering]="config.filtering"
-                 class="form-control"
-                 id="fields"
-                 placeholder="Filter all columns"/>
-        </div>
+    <div class="row">
+      <div class="col-2">
+        <app-sidebar [states]="state" [projectId]="projectId"></app-sidebar>
       </div>
-      <br>
-      <ng-table (cellClicked)="onCellClick($event)"
-                (tableChanged)="onChangeTable(config)"
-                [columns]="columns"
-                [config]="config" [rows]="rows"
-                class="test">
-      </ng-table>
-      <pagination (numPages)="numPages = $event"
-                  (pageChanged)="onChangeTable(config, $event)"
-                  *ngIf="config.paging"
-                  [(ngModel)]="page"
-                  [boundaryLinks]="true"
-                  [itemsPerPage]="itemsPerPage"
-                  [maxSize]="maxSize"
-                  [rotate]="false"
-                  [totalItems]="length"
-                  class="pagination-sm">
-      </pagination>
-      <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
+
+      <div class="col-10 py-4">
+        <h1 class="mb-4">Your Tickets:</h1>
+        <div class="row">
+
+          <div class="col-md-4">
+            <section>
+              <label class="form-control-label" for="tickets">Search ticket by name: </label>
+              <ng-autocomplete (selected)='openTicket($event)' [data]="tickets"
+                               [itemTemplate]="itemTemplate"
+                               [notFoundTemplate]="notFoundTemplate"
+                               [searchKeyword]="keyword"
+                               historyIdentifier="tickets"
+                               id="tickets"
+                               placeHolder="Enter Ticket name">
+              </ng-autocomplete>
+
+              <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </section>
+
+            <label class="form-control-label" for="fields">Search ticket by all fields: </label>
+            <input (tableChanged)="onChangeTable(config)" *ngIf="config.filtering"
+                   [ngTableFiltering]="config.filtering"
+                   class="form-control"
+                   id="fields"
+                   placeholder="Filter all columns"/>
+          </div>
+        </div>
+        <br>
+        <ng-table (cellClicked)="onCellClick($event)"
+                  (tableChanged)="onChangeTable(config)"
+                  [columns]="columns"
+                  [config]="config" [rows]="rows"
+                  class="test">
+        </ng-table>
+        <pagination (numPages)="numPages = $event"
+                    (pageChanged)="onChangeTable(config, $event)"
+                    *ngIf="config.paging"
+                    [(ngModel)]="page"
+                    [boundaryLinks]="true"
+                    [itemsPerPage]="itemsPerPage"
+                    [maxSize]="maxSize"
+                    [rotate]="false"
+                    [totalItems]="length"
+                    class="pagination-sm">
+        </pagination>
+        <pre *ngIf="config.paging" class="card card-block card-header">Page: {{page}} / {{numPages}}</pre>
+      </div>
     </div>
   </div>
-</div>

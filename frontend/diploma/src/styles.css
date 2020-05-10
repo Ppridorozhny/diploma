@@ -18,3 +18,8 @@
   content: url("assets/delete-button.svg");
   cursor: pointer;
 }
+
+.jumbotron{
+  height: 100vh;
+  margin-bottom: 0px;
+}
