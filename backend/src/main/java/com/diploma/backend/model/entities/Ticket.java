@@ -34,12 +34,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldNameConstants;
 
 @Data
 @Entity
 @Table(name = "pr_ticket")
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants
 @EqualsAndHashCode(callSuper = true)
 @TypeDef(name = "pg_enum", typeClass = PostgresEnumType.class)
 public class Ticket extends BaseAuditEntity {
