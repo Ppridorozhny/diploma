@@ -20,6 +20,12 @@
 }
 
 .jumbotron{
-  height: 100vh;
+  height: 100%;
   margin-bottom: 0px;
+}
+
+.close-btn {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
 }

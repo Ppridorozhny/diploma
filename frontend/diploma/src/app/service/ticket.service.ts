@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Ticket} from "../model/ticket";
+import {Status} from "../model/status";
+import {ChangeStatus} from "../model/changeStatus";
 
 @Injectable({providedIn: 'root'})
 export class TicketService {
@@ -25,6 +27,15 @@ export class TicketService {
 
   getTicketById(id: number) {
     return this.http.get<Ticket>('api/tickets/' + id);
+  }
+
+  getAvailableStatuses(currentStatus: Status) {
+    let params = new HttpParams().set('currentStatus', currentStatus.toString())
+    return this.http.get<Status[]>('api/dictionary/getAvailableStatuses', {params: params});
+  }
+
+  changeStatus(changeStatus: ChangeStatus) {
+    return this.http.post<Ticket>('/api/tickets/change-status', changeStatus);
   }
 
 }

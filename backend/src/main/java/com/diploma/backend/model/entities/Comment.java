@@ -36,4 +36,9 @@ public class Comment extends BaseAuditEntity {
 
     private Integer ticketId;
 
+    public Comment(String text, Integer ticketId) {
+        this.text = text;
+        this.ticketId = ticketId;
+    }
+
 }

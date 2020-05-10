@@ -11,6 +11,8 @@ import {Resolution} from "../../../model/resolution";
 import {FormControl} from "@angular/forms";
 import {Commentt} from "../../../model/commentt";
 import {CommentService} from "../../../service/comment.service";
+import {Status} from "../../../model/status";
+import {ChangeStatus} from "../../../model/changeStatus";
 
 @Component({
   selector: 'app-ticket',
@@ -32,6 +34,9 @@ export class TicketComponent implements OnInit {
   commentControl = new FormControl();
   isSubmitting = false;
   comments: Commentt[];
+  availableStatuses: Status[];
+  changeButtonDisabled: boolean = true;
+  changeStatusModel: ChangeStatus;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -54,15 +59,30 @@ export class TicketComponent implements OnInit {
     });
 
     this.getTicket();
+    this.getComments();
+
+    this.spinner.hide();
+  }
+
+  getComments() {
     this.commentService.getAllByTicketId(this.ticketId)
       .pipe(first())
       .subscribe(comments => {
         this.comments = comments;
+        this.commentControl.reset('');
       }, () => {
         this.alertService.error("Cannot get comments")
-      })
+      });
+  }
 
-    this.spinner.hide();
+  getAvailableStatuses(currentStatus: Status) {
+    this.ticketService.getAvailableStatuses(currentStatus)
+      .pipe(first())
+      .subscribe(statuses => {
+        this.availableStatuses = statuses;
+        this.changeButtonDisabled = false;
+        this.changeStatusModel = new ChangeStatus(this.ticketId);
+      }, error => this.alertService.error(error));
   }
 
   getTicket() {
@@ -82,6 +102,7 @@ export class TicketComponent implements OnInit {
             this.ticketService.getTicketById(ticket.epicId).pipe(first())
               .subscribe(epic => this.epic = epic)
           }
+          this.getAvailableStatuses(ticket.status);
         },
         () => this.alertService.error('Cannot load the ticket'));
   }
@@ -122,6 +143,21 @@ export class TicketComponent implements OnInit {
           this.alertService.error("Error during comment deleting")
         }
       );
+  }
+
+  doChangeStatus() {
+    this.changeButtonDisabled = true;
+    this.ticketService.changeStatus(this.changeStatusModel)
+      .pipe(first())
+      .subscribe(ticket => {
+        this.ticket = ticket;
+        if (this.changeStatusModel.comment && this.changeStatusModel.comment !== '') {
+
+          this.getComments();
+        }
+        this.changeStatusModel = new ChangeStatus(ticket.id);
+        this.changeButtonDisabled = false;
+      }, error => this.alertService.error(error));
   }
 
 }

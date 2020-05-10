@@ -17,6 +17,14 @@ public enum Status {
     READY_FOR_TESTING("Ready For Testing"),
     CLOSED("Closed");
 
+    public static Status[] AFTER_OPEN = {IN_ASSESSMENT, ASSESSED, IN_PROGRESS, IMPLEMENTED, READY_FOR_TESTING, CLOSED};
+    public static Status[] AFTER_IN_ASSESSMENT = {OPEN, ASSESSED};
+    public static Status[] AFTER_ASSESSED = {OPEN, IN_PROGRESS, READY_FOR_TESTING, CLOSED};
+    public static Status[] AFTER_IN_PROGRESS = {IMPLEMENTED, READY_FOR_TESTING, CLOSED};
+    public static Status[] AFTER_IMPLEMENTED = {READY_FOR_TESTING, CLOSED};
+    public static Status[] AFTER_READY_FOR_TESTING = {OPEN, CLOSED};
+    public static Status[] AFTER_CLOSED = {OPEN};
+
     private final String keyName;
 
     Status(String keyName) {

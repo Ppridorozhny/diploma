@@ -3,6 +3,7 @@ package com.diploma.backend.service;
 import java.util.List;
 
 import com.diploma.backend.model.entities.Ticket;
+import com.diploma.backend.model.pojo.ChangeStatus;
 
 public interface TicketService {
 
@@ -19,5 +20,7 @@ public interface TicketService {
     List<Ticket> getAllEpics();
 
     List<Ticket> getTicketsByProjectId(Integer projectId);
+
+    Ticket changeStatus(ChangeStatus changeStatus);
 
 }

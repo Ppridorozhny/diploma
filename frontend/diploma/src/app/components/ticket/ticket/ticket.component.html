@@ -4,13 +4,13 @@
 
       <div class="row">
 
-        <div class="col-2 py-5">
+        <div class="col-2 py-4">
           <app-sidebar [states]="state" [projectId]="projectId"></app-sidebar>
         </div>
 
-        <div class="col-10 py-2">
+        <div class="col-8 py-2">
 
-          <div class="py-2 d-flex justify-content-between flex-wrap align-items-center">
+          <div class="d-flex justify-content-between flex-wrap align-items-center">
             <h2>Ticket Info</h2>
           </div>
 
@@ -54,12 +54,19 @@
           </ul>
 
         </div>
+
+        <div class="col-2 py-5">
+          <button class="btn btn-primary" [disabled]="changeButtonDisabled"
+                  (click)="changeStatus.show();">Change status
+          </button>
+        </div>
+
       </div>
 
       <br><br>
       <div class="row">
 
-        <div class="col-10 offset-2">
+        <div class="col-8 offset-2">
           <div class="form-group purple-border">
             <form (ngSubmit)="addComment()">
               <textarea [formControl]="commentControl" class="form-control" maxlength="100"
@@ -73,7 +80,7 @@
           </div>
         </div>
 
-        <div *ngIf="comments" class="col-10 offset-md-2">
+        <div *ngIf="comments" class="col-8 offset-md-2">
           <comment-list
             (deleteComment)="onDeleteComment(comment.id)"
             *ngFor="let comment of comments"
@@ -82,6 +89,38 @@
         </div>
 
       </div>
+    </div>
+
+    <div>
+      <app-modal-window #changeStatus>
+        <div class="modal-header d-flex justify-content-between align-items-center">
+          <h4 class="modal-title">Change status</h4>
+          <img class="close-btn" src="assets/close.svg" (click)="changeStatus.hide()" alt="">
+        </div>
+
+        <div class="app-modal-body">
+          <form name="form" role="form" #changeStatusForm="ngForm">
+            <div class="form-group">
+              <label for="changeStatus">Status:</label>
+              <select [(ngModel)]="changeStatusModel.newStatus" class="form-control" id="changeStatus" name="changeStatus"
+                      required>
+                <option *ngFor="let status of availableStatuses" [ngValue]="status">{{status}}</option>
+              </select>
+              <label for="changeComment">Comment:</label>
+              <textarea [(ngModel)]="changeStatusModel.comment" class="form-control" maxlength="100"
+                        id="changeComment"
+                        name="message"
+                        placeholder="Why do you change status?" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+
+        <div class="app-modal-footer">
+          <button class="btn btn-success" [disabled]="changeStatusForm.form.invalid"
+                  (click)="changeStatus.hide(); doChangeStatus()">Change
+          </button>
+        </div>
+      </app-modal-window>
     </div>
 
   </div>

@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diploma.backend.AppConstants;
+import com.diploma.backend.model.dto.ChangeStatusDTO;
 import com.diploma.backend.model.dto.TicketDTO;
 import com.diploma.backend.model.entities.Ticket;
+import com.diploma.backend.model.pojo.ChangeStatus;
 import com.diploma.backend.service.TicketService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +76,13 @@ public class TicketController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTicket(@PathVariable Integer id) {
         ticketService.deleteTicket(id);
+    }
+
+    @PostMapping("/change-status")
+    public TicketDTO changeStatus(@RequestBody @Validated ChangeStatusDTO changeStatusDTO) {
+        ChangeStatus changeStatus = mapper.map(changeStatusDTO, ChangeStatus.class);
+        Ticket updatedTicket = ticketService.changeStatus(changeStatus);
+        return mapper.map(updatedTicket, TicketDTO.class);
     }
 
 }

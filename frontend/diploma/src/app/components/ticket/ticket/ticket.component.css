@@ -1,0 +1,13 @@
+.modal .head{
+  height: 150px;
+  background-color: #007bff;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.modal .head .close-btn{
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}

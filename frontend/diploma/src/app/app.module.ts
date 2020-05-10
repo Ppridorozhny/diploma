@@ -34,6 +34,7 @@ import {ProjectListComponent} from "./components/project/list/project.list.compo
 import {ProjectService} from "./service/project.service";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {SidebarComponent} from './components/sidebar/sidebar.component';
+import {ModalWindow} from "./components/modal.window/modal.window.component";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
     ProjectEditComponent,
     ProjectListComponent,
     ProfileComponent,
-    SidebarComponent
+    SidebarComponent,
+    ModalWindow
   ],
   imports: [
     BrowserModule,
