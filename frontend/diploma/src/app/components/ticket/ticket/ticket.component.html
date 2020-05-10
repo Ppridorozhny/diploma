@@ -27,13 +27,13 @@
             <li *ngIf="epic" class="list-group-item">Epic:
               <a href="project/{{projectId}}/ticket/{{ticket.epicId}}">{{epic.name}}</a>
             </li>
-            <li *ngIf="assignee" class="list-group-item"> Assignee: {{assignee.username}} : {{assignee.firstName}}
+            <li *ngIf="assignee" class="list-group-item"> Assignee:
+              <a href="profile/{{assignee.username}}">{{assignee.username}}</a> - {{assignee.firstName}}
               {{assignee.lastName}}
-              <!--              <a href="#/{{ownerLogin}}/profile">{{ownerLogin}}</a>-->
             </li>
-            <li *ngIf="reporter" class="list-group-item"> Reporter: {{reporter.username}} : {{reporter.firstName}}
+            <li *ngIf="reporter" class="list-group-item"> Reporter:
+              <a href="profile/{{reporter.username}}">{{reporter.username}}</a> - {{reporter.firstName}}
               {{reporter.lastName}}
-              <!--              <a href="#/{{ownerLogin}}/profile">{{ownerLogin}}</a>-->
             </li>
             <li *ngIf="this.ticket.labels && this.ticket.labels.length != 0" class="list-group-item">
               <div class="container">

@@ -39,8 +39,8 @@
           <li class="list-group-item active">Activity in tickets</li>
           <li *ngFor="let ticket of tickets" class="list-group-item">
             <div *ngIf="ticket.assigneeId === profile.id; then thenBlock; else elseBlock"></div>
-            <ng-template #elseBlock>Reporter for ticket</ng-template>
-            <ng-template #thenBlock>Assignee for ticket</ng-template>
+            <ng-template #elseBlock>Reporter for ticket </ng-template>
+            <ng-template #thenBlock>Assignee for ticket </ng-template>
             <a href="project/{{ticket.projectId}}/ticket/{{ticket.id}}">{{ticket.name}}</a>
           </li>
         </ul>
