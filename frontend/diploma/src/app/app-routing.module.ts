@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
-import {HomeComponent} from "./components/home/home.component";
 import {AuthGuard} from "./service/auth.guard";
 import {TicketAddComponent} from "./components/ticket/ticket.add/ticket.add.component";
 import {TicketComponent} from "./components/ticket/ticket/ticket.component";
@@ -15,7 +14,7 @@ import {ProfileComponent} from "./components/profile/profile.component";
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: '', component: ProjectListComponent, canActivate: [AuthGuard]},
   {path: 'project', component: ProjectListComponent, canActivate: [AuthGuard]},
   {path: 'project/create', component: ProjectAddComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId', component: ProjectComponent, canActivate: [AuthGuard]},

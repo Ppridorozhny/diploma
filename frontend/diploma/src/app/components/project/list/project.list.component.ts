@@ -193,4 +193,8 @@ export class ProjectListComponent implements OnInit {
     this.openProject(data.row);
   }
 
+  createProject() {
+    this.router.navigate(["/project/create"]);
+  }
+
 }
