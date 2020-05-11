@@ -47,4 +47,12 @@ export class ProjectComponent implements OnInit {
         () => this.alertService.error('Cannot load the project'));
   }
 
+  editProject() {
+    this.router.navigate(["/project/" + this.projectId + "/edit"]);
+  }
+
+  createTicket() {
+    this.router.navigate(["/project/" + this.projectId + "/ticket/create"]);
+  }
+
 }

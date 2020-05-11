@@ -194,4 +194,8 @@ export class TicketListComponent implements OnInit {
     this.openTicket(data.row);
   }
 
+  createTicket() {
+    this.router.navigate(["/project/" + this.projectId + "/ticket/create"]);
+  }
+
 }
