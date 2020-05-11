@@ -13,6 +13,9 @@ import {Commentt} from "../../../model/commentt";
 import {CommentService} from "../../../service/comment.service";
 import {Status} from "../../../model/status";
 import {ChangeStatus} from "../../../model/changeStatus";
+import {TicketRelation} from "../../../model/ticketRelation";
+import {TicketRelationsService} from "../../../service/ticket-relations.service";
+import {RelationType} from "../../../model/relationType";
 
 @Component({
   selector: 'app-ticket',
@@ -37,6 +40,11 @@ export class TicketComponent implements OnInit {
   availableStatuses: Status[];
   changeButtonDisabled: boolean = true;
   changeStatusModel: ChangeStatus;
+  relations: TicketRelation[];
+  newRelation: TicketRelation = new TicketRelation();
+  relationTypes: any = RelationType;
+  keyword = 'name';
+  tickets: Ticket[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -44,7 +52,8 @@ export class TicketComponent implements OnInit {
               private alertService: AlertService,
               private userService: UserService,
               private ticketService: TicketService,
-              private commentService: CommentService
+              private commentService: CommentService,
+              private relationService: TicketRelationsService
   ) {
   }
 
@@ -60,8 +69,25 @@ export class TicketComponent implements OnInit {
 
     this.getTicket();
     this.getComments();
+    this.getRelations();
+    this.getTickets();
 
     this.spinner.hide();
+  }
+
+  getTickets() {
+    this.ticketService.getAllByProjectId(this.projectId)
+      .pipe(first())
+      .subscribe(tickets => {
+        this.tickets = tickets.filter(t => t.id != this.ticketId);
+      }, e => this.alertService.error(e));
+  }
+
+  getRelations() {
+    this.relationService.getRelationsByTicketId(this.ticketId)
+      .pipe(first())
+      .subscribe(relations => this.relations = relations
+        , e => this.alertService.error(e));
   }
 
   getComments() {
@@ -171,9 +197,32 @@ export class TicketComponent implements OnInit {
         () => {
           this.router.navigate(["/project/" + this.projectId + "/ticket"]);
           this.alertService.success("Ticket was deleted successfully");
-        }, e => {this.alertService.error(e);}
+        }, e => this.alertService.error(e)
       )
+  }
 
+  deleteRelation(id: number) {
+    this.relationService.delete(id)
+      .pipe(first())
+      .subscribe(() => {
+          this.alertService.success('Relation was deleted successfully');
+          this.getRelations();
+        },
+        e => this.alertService.error(e));
+  }
+
+  selectTarget(target: Ticket) {
+    this.newRelation.target.id = target.id;
+  }
+
+  addNewRelation() {
+    this.newRelation.source.id = this.ticketId;
+    this.relationService.create(this.newRelation).pipe(first())
+      .subscribe(() => {
+        this.alertService.success('Relation was added successfully');
+        this.newRelation = new TicketRelation();
+        this.getRelations();
+      }, e => this.alertService.error(e));
   }
 
 }

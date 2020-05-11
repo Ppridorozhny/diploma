@@ -9,6 +9,7 @@ import com.diploma.backend.model.dto.CommentDTO;
 import com.diploma.backend.model.dto.ProjectDTO;
 import com.diploma.backend.model.dto.RunDTO;
 import com.diploma.backend.model.dto.TicketDTO;
+import com.diploma.backend.model.dto.TicketRelationDTO;
 import com.diploma.backend.model.dto.UserShortDTO;
 
 public class AppConstants {
@@ -26,6 +27,9 @@ public class AppConstants {
     }).getType();
 
     public static final Type COMMENT_LIST_TYPE = (new TypeToken<List<CommentDTO>>() {
+    }).getType();
+
+    public static final Type RELATIONS_LIST_TYPE = (new TypeToken<List<TicketRelationDTO>>() {
     }).getType();
 
     public static final String ROLE_USER = "USER";

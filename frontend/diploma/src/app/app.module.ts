@@ -35,6 +35,7 @@ import {ProjectService} from "./service/project.service";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {ModalWindow} from "./components/modal.window/modal.window.component";
+import {TicketRelationsService} from "./service/ticket-relations.service";
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import {ModalWindow} from "./components/modal.window/modal.window.component";
     TicketService,
     CommentService,
     ProjectService,
+    TicketRelationsService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

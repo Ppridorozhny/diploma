@@ -64,22 +64,54 @@
                   (click)="deleteTicket();">Delete ticket
           </button>
         </div>
-
       </div>
 
-      <br><br>
+      <div class="row">
+        <div class="col-8 offset-2">
+          <div class="row">
+            <div class="col-9">
+              <table class="table table-sm table-secondary">
+                <thead>
+                <th>Relation Type</th>
+                <th>Related Ticket</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let relation of relations">
+                  <td>{{relation.relationType}}</td>
+                  <td><a href="project/{{projectId}}/ticket/{{relation.target.id}}">{{relation.target.name}}</a><span
+                    (click)="deleteRelation(relation.id)" class="tag-glyphicon tag-glyphicon-delete"
+                    style="float: right"></span></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-3">
+              <button class="btn btn-primary" [disabled]="changeButtonDisabled"
+                      (click)="addRelation.show();">Add relation
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
 
         <div class="col-8 offset-2">
           <div class="form-group purple-border">
             <form (ngSubmit)="addComment()">
+              <div class="row">
+                <div class="col-10">
               <textarea [formControl]="commentControl" class="form-control" maxlength="100"
                         name="comment"
-                        placeholder="What do you think about that ticket?" rows="3"></textarea>
-              <button [disabled]="commentControl.invalid || isSubmitting" class="btn btn-success green offset-md-10"
-                      style="margin-top: 10px" type="submit"><i
-                class="fa fa-share"></i> Share
-              </button>
+                        placeholder="What do you think about that ticket?" rows="2"></textarea>
+                </div>
+                <div class="col-2">
+                  <button [disabled]="commentControl.invalid || isSubmitting" class="btn btn-success green"
+                          style="margin-top: 10px" type="submit"><i
+                    class="fa fa-share"></i> Share
+                  </button>
+                </div>
+              </div>
             </form>
           </div>
         </div>
@@ -123,6 +155,57 @@
         <div class="app-modal-footer">
           <button class="btn btn-success" [disabled]="changeStatusForm.form.invalid"
                   (click)="changeStatus.hide(); doChangeStatus()">Change
+          </button>
+        </div>
+      </app-modal-window>
+    </div>
+
+    <div>
+      <app-modal-window #addRelation>
+        <div class="modal-header d-flex justify-content-between align-items-center">
+          <h4 class="modal-title">Change status</h4>
+          <img class="close-btn" src="assets/close.svg" (click)="addRelation.hide()" alt="">
+        </div>
+
+        <div class="app-modal-body">
+          <form name="form" role="form" #relationForm="ngForm">
+            <div class="form-group">
+              <label for="relationType">Relation Type:*</label>
+              <select [(ngModel)]="newRelation.relationType" class="form-control" id="relationType"
+                      name="relationType"
+                      required>
+                <option value="{{relationTypes.RELATES_TO}}">{{relationTypes.RELATES_TO}}</option>
+                <option value="{{relationTypes.BLOCKS}}">{{relationTypes.BLOCKS}}</option>
+                <option value="{{relationTypes.BLOCKED_BY}}">{{relationTypes.BLOCKED_BY}}</option>
+                <option value="{{relationTypes.DUPLICATES}}">{{relationTypes.DUPLICATES}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" for="target">Choose target ticket:* </label>
+              <ng-autocomplete (selected)='selectTarget($event)' [data]="tickets"
+                               [itemTemplate]="ticketTemplate"
+                               [notFoundTemplate]="notFoundTemplate"
+                               [searchKeyword]="keyword"
+                               historyIdentifier="tickets"
+                               id="target"
+                               name="target"
+                               placeHolder="Enter ticket name" required>
+              </ng-autocomplete>
+
+              <ng-template #ticketTemplate let-item>
+                <a [innerHTML]="item.name"></a>
+              </ng-template>
+
+              <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+              </ng-template>
+            </div>
+          </form>
+        </div>
+
+        <div class="app-modal-footer">
+          <button class="btn btn-success" [disabled]="relationForm.form.invalid"
+                  (click)="addRelation.hide(); addNewRelation()">Add
           </button>
         </div>
       </app-modal-window>

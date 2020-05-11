@@ -22,10 +22,10 @@ public class TicketRelationDTO {
 
     @NotNull
     @EqualsAndHashCode.Exclude
-    private TicketDTO source;
+    private TicketShortDTO source;
 
     @NotNull
     @EqualsAndHashCode.Exclude
-    private TicketDTO target;
+    private TicketShortDTO target;
 
 }
