@@ -13,7 +13,13 @@ public enum TicketType {
     TASK("Task"),
     SUBTASK("Sub-task"),
     EPIC("Epic"),
-    STORY("Story");
+    STORY("Story"),
+    DEFAULT("Default");
+
+    public static final TicketType[] FOR_EPIC = {STORY, TASK, DEFECT};
+    public static final TicketType[] FOR_STORY = {TASK, DEFECT};
+    public static final TicketType[] FOR_TASK = {SUBTASK};
+    public static final TicketType[] FOR_DEFAULT = {STORY, TASK, DEFECT, EPIC};
 
     private final String keyName;
 

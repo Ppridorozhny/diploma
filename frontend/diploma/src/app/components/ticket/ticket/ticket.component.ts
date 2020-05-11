@@ -16,6 +16,7 @@ import {ChangeStatus} from "../../../model/changeStatus";
 import {TicketRelation} from "../../../model/ticketRelation";
 import {TicketRelationsService} from "../../../service/ticket-relations.service";
 import {RelationType} from "../../../model/relationType";
+import {TicketType} from "../../../model/ticket.type";
 
 @Component({
   selector: 'app-ticket',
@@ -45,6 +46,7 @@ export class TicketComponent implements OnInit {
   relationTypes: any = RelationType;
   keyword = 'name';
   tickets: Ticket[];
+  types: TicketType[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -73,6 +75,15 @@ export class TicketComponent implements OnInit {
     this.getTickets();
 
     this.spinner.hide();
+  }
+
+  getPossibleChild(type: TicketType) {
+    this.ticketService.getAvailableTypes(type)
+      .pipe(first())
+      .subscribe(types => this.types = types,
+        e => this.alertService.error(e)
+      )
+    ;
   }
 
   getTickets() {
@@ -129,6 +140,7 @@ export class TicketComponent implements OnInit {
               .subscribe(epic => this.epic = epic)
           }
           this.getAvailableStatuses(ticket.status);
+          this.getPossibleChild(ticket.type);
         },
         () => this.alertService.error('Cannot load the ticket'));
   }
@@ -223,6 +235,11 @@ export class TicketComponent implements OnInit {
         this.newRelation = new TicketRelation();
         this.getRelations();
       }, e => this.alertService.error(e));
+  }
+
+  createChild() {
+    this.router.navigate(["/project/" + this.projectId + "/ticket/create"],
+      {queryParams: {'type': this.ticket.type.toString(), 'parent': this.ticketId.toString()}});
   }
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,14 +60,16 @@ public class TicketController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TicketDTO createTicket(@RequestBody @Validated TicketDTO ticketDTO) {
+    public TicketDTO createTicket(@RequestBody @Validated TicketDTO ticketDTO,
+                                  @RequestParam(required = false) Integer parentTicketId) {
         Ticket ticket = mapper.map(ticketDTO, Ticket.class);
-        ticket = ticketService.createTicket(ticket);
+        ticket = ticketService.createTicket(ticket, parentTicketId);
         return mapper.map(ticket, TicketDTO.class);
     }
 
     @PutMapping("/{id}")
-    public TicketDTO updateTicket(@RequestBody @Validated TicketDTO ticketDTO, @PathVariable Integer id) {
+    public TicketDTO updateTicket(@RequestBody @Validated TicketDTO ticketDTO,
+                                  @PathVariable Integer id) {
         Ticket ticket = mapper.map(ticketDTO, Ticket.class);
         ticket = ticketService.updateTicket(id, ticket);
         return mapper.map(ticket, TicketDTO.class);

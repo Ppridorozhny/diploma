@@ -11,10 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.diploma.backend.error.exceptions.ResourceNotFoundException;
 import com.diploma.backend.model.entities.Comment;
 import com.diploma.backend.model.entities.Ticket;
+import com.diploma.backend.model.entities.TicketRelation;
+import com.diploma.backend.model.enums.RelationType;
 import com.diploma.backend.model.enums.TicketType;
 import com.diploma.backend.model.pojo.ChangeStatus;
 import com.diploma.backend.repository.TicketRepository;
 import com.diploma.backend.service.CommentService;
+import com.diploma.backend.service.TicketRelationService;
 import com.diploma.backend.service.TicketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,17 +29,35 @@ public class TicketServiceImpl implements TicketService {
 
     private final TicketRepository ticketRepository;
     private final CommentService commentService;
+    private final TicketRelationService relationService;
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public Ticket createTicket(Ticket ticket) {
-        return ticketRepository.save(ticket);
+    public Ticket createTicket(Ticket ticket, Integer parentTicketId) {
+        final Ticket created = ticketRepository.save(ticket);
+        if (parentTicketId != null) {
+            final Ticket parent = getTicket(parentTicketId);
+
+            TicketRelation parentRelation = new TicketRelation();
+            parentRelation.setSource(parent);
+            parentRelation.setTarget(created);
+            parentRelation.setRelationType(RelationType.PARENT);
+            relationService.create(parentRelation);
+
+
+            TicketRelation childRelation = new TicketRelation();
+            childRelation.setTarget(parent);
+            childRelation.setSource(created);
+            childRelation.setRelationType(RelationType.CHILD);
+            relationService.create(childRelation);
+        }
+        return created;
     }
 
     @Override
     public Ticket updateTicket(Integer id, Ticket ticket) {
         Ticket ticketFromCache = ticketRepository.getOne(id);
-        BeanUtils.copyProperties(ticket, ticketFromCache, "id", "reporter",
+        BeanUtils.copyProperties(ticket, ticketFromCache, "id", "type", "reporter",
                 "relations");
         return ticketRepository.save(ticketFromCache);
     }
@@ -74,12 +95,10 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = getTicket(changeStatus.getTicketId());
         ticket.setStatus(changeStatus.getNewStatus());
         ticketRepository.save(ticket);
-
         if (StringUtils.isNotBlank(changeStatus.getComment())) {
             Comment comment = new Comment(changeStatus.getComment(), changeStatus.getTicketId());
             commentService.createComment(comment);
         }
-
         return ticket;
     }
 

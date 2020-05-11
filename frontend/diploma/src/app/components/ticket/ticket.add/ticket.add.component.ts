@@ -25,7 +25,9 @@ export class TicketAddComponent implements OnInit {
   users: User[] = [];
   currentDate: string;
   priorities: any = Priority;
-  types: any = TicketType;
+  types: TicketType[];
+  type: TicketType = TicketType.DEFAULT;
+  parentId: number;
   time: string;
   date: string;
   keywordAssignee = 'username';
@@ -50,6 +52,24 @@ export class TicketAddComponent implements OnInit {
     this.ticket = new Ticket();
     this.route.params.subscribe(params => {
       this.projectId = params['projectId'];
+    }, () => {
+      this.alertService.error('Unsuccessful parameters loading', 'Loading error');
+    });
+
+    this.route.queryParams.subscribe(params => {
+      let type = params['type'];
+      if (type) {
+        this.type = type;
+      }
+      this.ticketService.getAvailableTypes(this.type)
+        .pipe(first())
+        .subscribe(types => this.types = types,
+          e => this.alertService.error(e));
+
+      let parent = params['parent'];
+      if (parent) {
+        this.parentId = parent;
+      }
     }, () => {
       this.alertService.error('Unsuccessful parameters loading', 'Loading error');
     });
@@ -103,7 +123,7 @@ export class TicketAddComponent implements OnInit {
   addTicket() {
     this.spinner.show();
     this.formatDate();
-    this.ticketService.createTicket(this.ticket).pipe(first())
+    this.ticketService.createTicket(this.ticket, this.parentId).pipe(first())
       .subscribe(ticket => {
         this.alertService.success("Ticket was created");
         this.spinner.hide();

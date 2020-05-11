@@ -4,4 +4,5 @@ export enum TicketType {
   SUBTASK = "Sub-task",
   EPIC = "Epic",
   STORY = "Story",
+  DEFAULT = "Default",
 }

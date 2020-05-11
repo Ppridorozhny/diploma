@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diploma.backend.model.enums.Status;
+import com.diploma.backend.model.enums.TicketType;
 import com.diploma.backend.service.impl.DictionaryService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,11 @@ public class DictionaryController {
     public Status[] getAvailableStatuses(@RequestParam Status currentStatus) {
         log.debug("Get available statuses");
         return dictionaryService.getAvailableStatuses(currentStatus);
+    }
+
+    @GetMapping("/getAvailableTypes")
+    public TicketType[] getAvailableTypes(@RequestParam TicketType currentType) {
+        return  dictionaryService.getAvailableTypes(currentType);
     }
 
 }

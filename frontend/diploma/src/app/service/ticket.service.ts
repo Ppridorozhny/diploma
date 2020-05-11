@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Ticket} from "../model/ticket";
 import {Status} from "../model/status";
 import {ChangeStatus} from "../model/changeStatus";
+import {TicketType} from "../model/ticket.type";
 
 @Injectable({providedIn: 'root'})
 export class TicketService {
@@ -21,8 +22,12 @@ export class TicketService {
     return this.http.get<Ticket[]>('api/tickets/epics');
   }
 
-  createTicket(ticket: Ticket) {
-    return this.http.post<Ticket>('/api/tickets', ticket);
+  createTicket(ticket: Ticket, parentId: number) {
+    let params = new HttpParams();
+    if (parentId) {
+      params = params.set('parentTicketId', parentId.toString());
+    }
+    return this.http.post<Ticket>('/api/tickets', ticket, {params: params});
   }
 
   update(ticket: Ticket) {
@@ -44,6 +49,11 @@ export class TicketService {
 
   delete(id: number) {
     return this.http.delete<any>('api/tickets/' + id);
+  }
+
+  getAvailableTypes(type: TicketType) {
+    let params = new HttpParams().set('currentType', type.toString())
+    return this.http.get<TicketType[]>('api/dictionary/getAvailableTypes', {params: params});
   }
 
 }

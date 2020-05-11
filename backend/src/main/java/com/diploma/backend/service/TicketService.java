@@ -7,7 +7,7 @@ import com.diploma.backend.model.pojo.ChangeStatus;
 
 public interface TicketService {
 
-    Ticket createTicket(Ticket ticket);
+    Ticket createTicket(Ticket ticket, Integer parentTicketId);
 
     Ticket updateTicket(Integer id, Ticket ticket);
 

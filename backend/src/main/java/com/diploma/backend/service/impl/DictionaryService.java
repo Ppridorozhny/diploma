@@ -11,6 +11,7 @@ import static com.diploma.backend.model.enums.Status.AFTER_READY_FOR_TESTING;
 import org.springframework.stereotype.Service;
 
 import com.diploma.backend.model.enums.Status;
+import com.diploma.backend.model.enums.TicketType;
 
 @Service
 public class DictionaryService {
@@ -43,6 +44,29 @@ public class DictionaryService {
                 availableStatuses = new Status[0];
         }
         return availableStatuses;
+    }
+
+    public TicketType[] getAvailableTypes(TicketType currentType) {
+        TicketType[] availableTypes;
+        switch (currentType) {
+            case DEFAULT:
+                availableTypes = TicketType.FOR_DEFAULT;
+                break;
+            case EPIC:
+                availableTypes = TicketType.FOR_EPIC;
+                break;
+            case TASK:
+                availableTypes = TicketType.FOR_TASK;
+                break;
+            case STORY:
+                availableTypes = TicketType.FOR_STORY;
+                break;
+            case DEFECT:
+            case SUBTASK:
+            default:
+                availableTypes = new TicketType[0];
+        }
+        return availableTypes;
     }
 
 }

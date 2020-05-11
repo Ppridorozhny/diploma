@@ -63,6 +63,11 @@
           <button class="btn btn-danger" [disabled]="ticket.status != 'Open'"
                   (click)="deleteTicket();">Delete ticket
           </button>
+
+          <br><br>
+          <button class="btn btn-success" [disabled]="!this.types || this.types.length === 0"
+                  (click)="createChild();">Create child
+          </button>
         </div>
       </div>
 

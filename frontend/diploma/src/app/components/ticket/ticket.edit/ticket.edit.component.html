@@ -30,16 +30,6 @@
         </div>
 
         <div class="form-group">
-          <label for="tupe">Ticket type:</label>
-          <select [(ngModel)]="ticket.type" class="form-control" id="tupe" name="tupe">
-            <option value="{{types.DEFECT}}">{{types.DEFECT}}</option>
-            <option value="{{types.TASK}}">{{types.TASK}}</option>
-            <option value="{{types.STORY}}">{{types.STORY}}</option>
-            <option value="{{types.EPIC}}">{{types.EPIC}}</option>
-          </select>
-        </div>
-
-        <div class="form-group">
           <label for="ticketPriority">Ticket priority:</label>
           <select [(ngModel)]="ticket.priority" class="form-control" id="ticketPriority" name="ticketPriority">
             <option value="{{priorities.BLOCKER}}">{{priorities.BLOCKER}}</option>
