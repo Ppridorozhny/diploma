@@ -19,6 +19,12 @@
   cursor: pointer;
 }
 
+.refresh-icon:before {
+  content: url("assets/refresh-icon.svg");
+  cursor: pointer;
+  float: right;
+}
+
 .jumbotron{
   height: 100vmax;
   margin-bottom: 0px;

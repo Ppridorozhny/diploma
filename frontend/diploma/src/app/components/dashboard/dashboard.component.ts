@@ -87,4 +87,10 @@ export class DashboardComponent implements OnInit {
       }, e => this.alertService.error('Cannot load user`s statistic'));
   }
 
+  updateUserStatistic() {
+    this.pieChartLabels = [];
+    this.pieChartData = [];
+    this.getUserStatistics();
+  }
+
 }
