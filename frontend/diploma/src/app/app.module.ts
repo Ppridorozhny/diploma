@@ -36,6 +36,7 @@ import {ProfileComponent} from "./components/profile/profile.component";
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {ModalWindow} from "./components/modal.window/modal.window.component";
 import {TicketRelationsService} from "./service/ticket-relations.service";
+import {ChartsModule} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import {TicketRelationsService} from "./service/ticket-relations.service";
     AutocompleteLibModule,
     Ng2TableModule,
     PaginationModule.forRoot(),
-    FontAwesomeModule
+    FontAwesomeModule,
+    ChartsModule
   ],
   providers: [
     AuthGuard,
