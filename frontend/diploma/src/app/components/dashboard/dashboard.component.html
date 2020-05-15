@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div>
+    <div *ngIf="project" class="container justify-content-center">
+
+      <div class="row">
+
+        <div class="col-2 py-4">
+          <app-sidebar [states]="state" [projectId]="projectId"></app-sidebar>
+        </div>
+
+        <div class="col-8">
+
+          <div class="d-flex justify-content-between flex-wrap align-items-center">
+            <h2>Dashboard for {{project.name}}</h2>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Tickets on users</h5>
+              <div class="chart">
+                <canvas baseChart
+                        [data]="pieChartData"
+                        [labels]="pieChartLabels"
+                        [chartType]="pieChartType"
+                        [options]="pieChartOptions"
+                        [plugins]="pieChartPlugins"
+                        [colors]="pieChartColors"
+                        [legend]="pieChartLegend">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            Last updated {{lastUpdated}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

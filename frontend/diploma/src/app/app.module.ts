@@ -37,6 +37,8 @@ import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {ModalWindow} from "./components/modal.window/modal.window.component";
 import {TicketRelationsService} from "./service/ticket-relations.service";
 import {ChartsModule} from "ng2-charts";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {DashboardService} from "./service/dashboard.service";
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import {ChartsModule} from "ng2-charts";
     ProjectListComponent,
     ProfileComponent,
     SidebarComponent,
-    ModalWindow
+    ModalWindow,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +83,7 @@ import {ChartsModule} from "ng2-charts";
     CommentService,
     ProjectService,
     TicketRelationsService,
+    DashboardService,
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],

@@ -11,6 +11,7 @@ import com.diploma.backend.model.dto.RunDTO;
 import com.diploma.backend.model.dto.TicketDTO;
 import com.diploma.backend.model.dto.TicketRelationDTO;
 import com.diploma.backend.model.dto.UserShortDTO;
+import com.diploma.backend.model.dto.UserStatisticDTO;
 
 public class AppConstants {
 
@@ -30,6 +31,9 @@ public class AppConstants {
     }).getType();
 
     public static final Type RELATIONS_LIST_TYPE = (new TypeToken<List<TicketRelationDTO>>() {
+    }).getType();
+
+    public static final Type USER_STATISTIC_LIST_TYPE = (new TypeToken<List<UserStatisticDTO>>() {
     }).getType();
 
     public static final String ROLE_USER = "USER";

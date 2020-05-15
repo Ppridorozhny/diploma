@@ -11,6 +11,7 @@ import {ProjectAddComponent} from "./components/project/project.add/project.add.
 import {ProjectEditComponent} from "./components/project/project.edit/project.edit.component";
 import {ProjectListComponent} from "./components/project/list/project.list.component";
 import {ProfileComponent} from "./components/profile/profile.component";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'project', component: ProjectListComponent, canActivate: [AuthGuard]},
   {path: 'project/create', component: ProjectAddComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId', component: ProjectComponent, canActivate: [AuthGuard]},
+  {path: 'project/:projectId/dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/create', component: TicketAddComponent, canActivate: [AuthGuard]},
   {path: 'project/:projectId/ticket/:ticketId', component: TicketComponent, canActivate: [AuthGuard]},

@@ -40,7 +40,7 @@ export class TicketService {
 
   getAvailableStatuses(currentStatus: Status) {
     let params = new HttpParams().set('currentStatus', currentStatus.toString())
-    return this.http.get<Status[]>('api/dictionary/getAvailableStatuses', {params: params});
+    return this.http.get<Status[]>('api/dictionary/available-statuses', {params: params});
   }
 
   changeStatus(changeStatus: ChangeStatus) {
@@ -53,7 +53,7 @@ export class TicketService {
 
   getAvailableTypes(type: TicketType) {
     let params = new HttpParams().set('currentType', type.toString())
-    return this.http.get<TicketType[]>('api/dictionary/getAvailableTypes', {params: params});
+    return this.http.get<TicketType[]>('api/dictionary/available-types', {params: params});
   }
 
 }

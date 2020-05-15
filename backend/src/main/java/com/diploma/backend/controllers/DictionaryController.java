@@ -24,13 +24,13 @@ public class DictionaryController {
 
     private final DictionaryService dictionaryService;
 
-    @GetMapping("/getAvailableStatuses")
+    @GetMapping("/available-statuses")
     public Status[] getAvailableStatuses(@RequestParam Status currentStatus) {
         log.debug("Get available statuses");
         return dictionaryService.getAvailableStatuses(currentStatus);
     }
 
-    @GetMapping("/getAvailableTypes")
+    @GetMapping("/available-types")
     public TicketType[] getAvailableTypes(@RequestParam TicketType currentType) {
         return  dictionaryService.getAvailableTypes(currentType);
     }

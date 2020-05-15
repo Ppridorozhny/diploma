@@ -8,6 +8,8 @@ import {Ticket} from "../../../model/ticket";
 import {User} from "../../../model/user";
 import {debounceTime, distinctUntilChanged, first} from "rxjs/operators";
 import {TICKET_COLUMNS} from "./config/ticket.columns";
+import {ProjectService} from "../../../service/project.service";
+import {Project} from "../../../model/project";
 
 @Component({
   selector: 'app-ticket-list',
@@ -18,6 +20,7 @@ export class TicketListComponent implements OnInit {
 
   state: string = "tickets";
   tickets: Ticket[] = [];
+  project: Project;
   projectId: number;
   profile: User;
   keyword = 'name';
@@ -43,7 +46,8 @@ export class TicketListComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private spinner: NgxSpinnerService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private projectService: ProjectService) {
   }
 
   ngOnInit() {
@@ -52,6 +56,10 @@ export class TicketListComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.projectId = params['projectId'];
+      this.projectService.getById(this.projectId)
+        .pipe(first())
+        .subscribe(project => this.project = project,
+          e => this.alertService.error('Cannot load project'));
     }, error => {
       this.alertService.error(error, 'Error');
     });
