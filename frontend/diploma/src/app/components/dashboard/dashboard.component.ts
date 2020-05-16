@@ -4,7 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {AlertService} from "../../service/alert.service";
 import {ProjectService} from "../../service/project.service";
-import {ChartOptions, ChartType} from "chart.js";
+import {ChartDataSets, ChartOptions, ChartType, RadialChartOptions} from "chart.js";
 import {Label} from "ng2-charts";
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import {first} from "rxjs/operators";
@@ -20,7 +20,8 @@ export class DashboardComponent implements OnInit {
   state: string = "dashboard";
   project: Project;
   projectId: number;
-  lastUpdated: Date = new Date();
+  lastUpdatedPie: Date = new Date();
+  lastUpdatedRadar: Date = new Date();
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -46,6 +47,27 @@ export class DashboardComponent implements OnInit {
       backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
     },
   ];
+  public radarChartColors = [
+    {
+      pointHoverBorderColor: ['rgba(179,181,198,1)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
+    },
+  ];
+
+  // Radar
+  public radarChartOptions: RadialChartOptions = {
+    responsive: true,
+    scale: {
+      ticks: {
+        beginAtZero: true,
+      }
+    }
+  };
+  public radarChartLabels: Label[] = [];
+
+  public radarChartData: ChartDataSets[] = [
+    { data: [], label: 'Ticket types' }
+  ];
+  public radarChartType: ChartType = 'radar';
 
   constructor(private route: ActivatedRoute,
               private spinner: NgxSpinnerService,
@@ -62,6 +84,7 @@ export class DashboardComponent implements OnInit {
       this.projectId = params['projectId'];
       this.getProject();
       this.getUserStatistics();
+      this.getTicketTypeStatistics();
     }, () => {
       this.alertService.error('Unsuccessful parameters loading', 'Loading error');
     });
@@ -81,8 +104,19 @@ export class DashboardComponent implements OnInit {
       .pipe(first())
       .subscribe(statistics => {
         statistics.forEach(statistic => {
-          this.pieChartLabels.push(statistic.username);
+          this.pieChartLabels.push(statistic.name);
           this.pieChartData.push(statistic.count);
+        });
+      }, e => this.alertService.error('Cannot load user`s statistic'));
+  }
+
+  getTicketTypeStatistics() {
+    this.dashboardService.getTicketTypeStatistic(this.projectId)
+      .pipe(first())
+      .subscribe(statistics => {
+        statistics.forEach(statistic => {
+          this.radarChartLabels.push(statistic.name);
+          this.radarChartData[0].data.push(statistic.count);
         });
       }, e => this.alertService.error('Cannot load user`s statistic'));
   }
@@ -91,6 +125,16 @@ export class DashboardComponent implements OnInit {
     this.pieChartLabels = [];
     this.pieChartData = [];
     this.getUserStatistics();
+    this.lastUpdatedPie = new Date();
+  }
+
+  updateTicketTypeStatistic() {
+    this.radarChartLabels = [];
+    this.radarChartData = [
+      { data: [], label: 'Ticket types' }
+    ];
+    this.getTicketTypeStatistics();
+    this.lastUpdatedRadar = new Date();
   }
 
 }

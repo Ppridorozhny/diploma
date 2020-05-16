@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {TicketRelation} from "../model/ticketRelation";
+import {TicketRelation} from "../model/ticket.relation";
 
 @Injectable({providedIn: 'root'})
 export class TicketRelationsService {

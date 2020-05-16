@@ -1,5 +1,5 @@
-import {TicketShort} from "./ticketShort";
-import {RelationType} from "./relationType";
+import {TicketShort} from "./ticket.short";
+import {RelationType} from "./relation.type";
 
 export class TicketRelation {
   id: number;

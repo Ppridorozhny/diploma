@@ -32,30 +32,28 @@
             </div>
           </div>
           <div class="card-footer text-muted">
-            Last updated {{lastUpdated | date:'mediumTime'}}
+            Last updated {{lastUpdatedPie | date:'mediumTime'}}
           </div>
         </div>
         <div class="col-5">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Tickets on
-                users<i (click)="updateUserStatistic()" class="refresh-icon"></i></h5>
+              <h5 class="card-title">Ticket types
+                <i (click)="updateTicketTypeStatistic()" class="refresh-icon"></i></h5>
               <div class="chart">
                 <canvas baseChart
-                        [data]="pieChartData"
-                        [labels]="pieChartLabels"
-                        [chartType]="pieChartType"
-                        [options]="pieChartOptions"
-                        [plugins]="pieChartPlugins"
-                        [colors]="pieChartColors"
-                        [legend]="pieChartLegend">
+                        [datasets]="radarChartData"
+                        [options]="radarChartOptions"
+                        [labels]="radarChartLabels"
+                        [colors]="radarChartColors"
+                        [chartType]="radarChartType">
                 </canvas>
               </div>
             </div>
           </div>
           <div class="card-footer text-muted">
-            Last updated {{lastUpdated | date:'mediumTime'}}
+            Last updated {{lastUpdatedRadar | date:'mediumTime'}}
           </div>
         </div>
       </div>

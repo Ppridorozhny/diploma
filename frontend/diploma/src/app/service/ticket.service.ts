@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Ticket} from "../model/ticket";
 import {Status} from "../model/status";
-import {ChangeStatus} from "../model/changeStatus";
+import {ChangeStatus} from "../model/change.status";
 import {TicketType} from "../model/ticket.type";
 
 @Injectable({providedIn: 'root'})

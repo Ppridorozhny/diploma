@@ -12,10 +12,10 @@ import {FormControl} from "@angular/forms";
 import {Commentt} from "../../../model/commentt";
 import {CommentService} from "../../../service/comment.service";
 import {Status} from "../../../model/status";
-import {ChangeStatus} from "../../../model/changeStatus";
-import {TicketRelation} from "../../../model/ticketRelation";
+import {ChangeStatus} from "../../../model/change.status";
+import {TicketRelation} from "../../../model/ticket.relation";
 import {TicketRelationsService} from "../../../service/ticket-relations.service";
-import {RelationType} from "../../../model/relationType";
+import {RelationType} from "../../../model/relation.type";
 import {TicketType} from "../../../model/ticket.type";
 
 @Component({

@@ -8,10 +8,11 @@ import org.modelmapper.TypeToken;
 import com.diploma.backend.model.dto.CommentDTO;
 import com.diploma.backend.model.dto.ProjectDTO;
 import com.diploma.backend.model.dto.RunDTO;
+import com.diploma.backend.model.dto.StatisticEntryDTO;
 import com.diploma.backend.model.dto.TicketDTO;
 import com.diploma.backend.model.dto.TicketRelationDTO;
+import com.diploma.backend.model.dto.TicketTypeStatisticEntryDTO;
 import com.diploma.backend.model.dto.UserShortDTO;
-import com.diploma.backend.model.dto.UserStatisticDTO;
 
 public class AppConstants {
 
@@ -33,7 +34,10 @@ public class AppConstants {
     public static final Type RELATIONS_LIST_TYPE = (new TypeToken<List<TicketRelationDTO>>() {
     }).getType();
 
-    public static final Type USER_STATISTIC_LIST_TYPE = (new TypeToken<List<UserStatisticDTO>>() {
+    public static final Type STATISTIC_LIST_TYPE = (new TypeToken<List<StatisticEntryDTO>>() {
+    }).getType();
+
+    public static final Type TICKET_TYPE_STATISTIC_LIST_TYPE = (new TypeToken<List<TicketTypeStatisticEntryDTO>>() {
     }).getType();
 
     public static final String ROLE_USER = "USER";

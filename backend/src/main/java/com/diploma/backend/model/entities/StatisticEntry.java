@@ -1,8 +1,8 @@
 package com.diploma.backend.model.entities;
 
-public interface UserStatistic {
+public interface StatisticEntry {
 
-    String getUsername();
+    String getName();
 
     Integer getCount();
 
