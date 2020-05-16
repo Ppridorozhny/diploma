@@ -1,6 +1,6 @@
 <div class="container-fluid" style="margin-top:20px">
   <div>
-    <div *ngIf="ticket" class="container justify-content-center">
+    <div *ngIf="ticket" class="container-fluid justify-content-center">
 
       <div class="row">
 
@@ -40,7 +40,7 @@
               {{reporter.lastName}}
             </li>
             <li *ngIf="this.ticket.labels && this.ticket.labels.length != 0" class="list-group-item">
-              <div class="container">
+              <div class="container-fluid">
                 <div class="row">
                   <label class="form-control-label" for="ticketLabels">Labels: </label>
                   <div *ngFor="let label of ticket.labels" id="ticketLabels">
@@ -71,7 +71,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row justify-content-center">
         <div class="col-8 offset-2">
           <div class="row">
             <div class="col-9">
@@ -104,8 +104,8 @@
         <div class="col-8 offset-2">
           <div class="form-group purple-border">
             <form (ngSubmit)="addComment()">
-              <div class="row">
-                <div class="col-10">
+              <div class="row justify-content-center">
+                <div class="col-5">
               <textarea [formControl]="commentControl" class="form-control" maxlength="100"
                         name="comment"
                         placeholder="What do you think about that ticket?" rows="2"></textarea>
