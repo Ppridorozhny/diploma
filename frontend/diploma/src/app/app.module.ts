@@ -35,7 +35,7 @@ import {ProjectService} from "./service/project.service";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import {ModalWindow} from "./components/modal.window/modal.window.component";
-import {TicketRelationsService} from "./service/ticket-relations.service";
+import {TicketRelationsService} from "./service/ticket.relations.service";
 import {ChartsModule} from "ng2-charts";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {DashboardService} from "./service/dashboard.service";

@@ -5,10 +5,11 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {AlertService} from "../../service/alert.service";
 import {ProjectService} from "../../service/project.service";
 import {ChartDataSets, ChartOptions, ChartType, RadialChartOptions} from "chart.js";
-import {Label} from "ng2-charts";
+import {Color, Label} from "ng2-charts";
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import {first} from "rxjs/operators";
 import {DashboardService} from "../../service/dashboard.service";
+import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
   projectId: number;
   lastUpdatedPie: Date = new Date();
   lastUpdatedRadar: Date = new Date();
+  lastUpdatedLinear: Date = new Date();
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -77,6 +79,63 @@ export class DashboardComponent implements OnInit {
   ) {
   }
 
+  public lineChartData: ChartDataSets[] = [
+    { data: [], label: 'Opened' },
+    { data: [], label: 'Closed' }
+  ];
+  public lineChartLabels: Label[] = [];
+  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+    responsive: true,
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      xAxes: [{}],
+      yAxes: [
+        {
+          id: 'y-axis-0',
+          position: 'left',
+        }
+      ]
+    },
+    annotation: {
+      annotations: [
+        {
+          type: 'line',
+          mode: 'vertical',
+          scaleID: 'x-axis-0',
+          value: 'March',
+          borderColor: 'orange',
+          borderWidth: 2,
+          label: {
+            enabled: true,
+            fontColor: 'orange',
+            content: 'LineAnno'
+          }
+        },
+      ],
+    },
+  };
+  public lineChartColors: Color[] = [
+    { // red
+      backgroundColor: 'rgba(255,0,0,0.3)',
+      borderColor: 'red',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    { // dark grey
+      backgroundColor: 'rgba(77,83,96,0.2)',
+      borderColor: 'rgba(77,83,96,1)',
+      pointBackgroundColor: 'rgba(77,83,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    }
+  ];
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  public lineChartPlugins = [pluginAnnotations];
+
   ngOnInit() {
     this.spinner.show();
 
@@ -85,6 +144,7 @@ export class DashboardComponent implements OnInit {
       this.getProject();
       this.getUserStatistics();
       this.getTicketTypeStatistics();
+      this.getDefectsStatistic();
     }, () => {
       this.alertService.error('Unsuccessful parameters loading', 'Loading error');
     });
@@ -118,7 +178,7 @@ export class DashboardComponent implements OnInit {
           this.radarChartLabels.push(statistic.name);
           this.radarChartData[0].data.push(statistic.count);
         });
-      }, e => this.alertService.error('Cannot load user`s statistic'));
+      }, e => this.alertService.error('Cannot load ticket`s statistic'));
   }
 
   updateUserStatistic() {
@@ -135,6 +195,27 @@ export class DashboardComponent implements OnInit {
     ];
     this.getTicketTypeStatistics();
     this.lastUpdatedRadar = new Date();
+  }
+
+  updateDefectsStatistic() {
+    this.lastUpdatedLinear = new Date();
+    this.lineChartLabels = [];
+    this.lineChartData[0].data = [];
+    this.lineChartData[1].data = [];
+    this.getDefectsStatistic();
+  }
+
+  getDefectsStatistic() {
+    this.dashboardService.getDefectsStatistic(this.projectId)
+      .pipe(first())
+      .subscribe(statistics => {
+        let keys: string[] = Object.keys(statistics).sort();
+        keys.forEach( key => {
+          this.lineChartLabels.push(key);
+          this.lineChartData[0].data.push(statistics[key].opened);
+          this.lineChartData[1].data.push(statistics[key].closed);
+        });
+      }, e => this.alertService.error('Cannot load defect`s statistic'));
   }
 
 }

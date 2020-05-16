@@ -17,9 +17,9 @@
           <ul class="list-group">
             <li class="list-group-item active justify-content-between d-flex">
               <span>{{ticket.name}}</span>
-              <div style="cursor: pointer;">
+              <div *ngIf="ticket.status != 'Closed'" style="cursor: pointer;">
                 <img src="assets/edit.svg" (click)="editTicket()" height="30"
-                     width="30"/>
+                     width="30" alt="edit"/>
               </div>
             </li>
             <li class="list-group-item">Priority: {{ticket.priority}}</li>

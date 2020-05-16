@@ -35,7 +35,25 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
     @Query("select ticket.type as name, count(ticket.type) as count "
             + "from Ticket ticket "
             + "where ticket.projectId = :projectId "
+            + "and ticket.status <> 'CLOSED'"
             + "group by ticket.type")
     List<TicketTypeStatisticEntry> getTicketTypeStatisticByProjectId(@Param("projectId") Integer projectId);
+
+    @Query(value = "select to_char(created_when, 'YYYY-MM') as name, count(*) as count "
+            + "from pr_ticket "
+            + "where project_id = :projectId "
+            + "and \"type\" = 'DEFECT' "
+            + "group by to_char(created_when, 'YYYY-MM') "
+            + "order by 1", nativeQuery = true)
+    List<StatisticEntry> getOpenedDefectsStatisticByProjectId(@Param("projectId") Integer projectId);
+
+    @Query(value = "select to_char(modified_when, 'YYYY-MM') as name, count(*) as count "
+            + "from pr_ticket "
+            + "where project_id = :projectId "
+            + "and \"type\" = 'DEFECT' "
+            + "and status = 'CLOSED' "
+            + "group by to_char(modified_when, 'YYYY-MM') "
+            + "order by 1", nativeQuery = true)
+    List<StatisticEntry> getClosedDefectsStatisticByProjectId(@Param("projectId") Integer projectId);
 
 }

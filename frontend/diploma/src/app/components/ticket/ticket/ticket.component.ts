@@ -14,7 +14,7 @@ import {CommentService} from "../../../service/comment.service";
 import {Status} from "../../../model/status";
 import {ChangeStatus} from "../../../model/change.status";
 import {TicketRelation} from "../../../model/ticket.relation";
-import {TicketRelationsService} from "../../../service/ticket-relations.service";
+import {TicketRelationsService} from "../../../service/ticket.relations.service";
 import {RelationType} from "../../../model/relation.type";
 import {TicketType} from "../../../model/ticket.type";
 

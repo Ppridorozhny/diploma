@@ -1,6 +1,7 @@
 package com.diploma.backend.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.diploma.backend.AppConstants;
 import com.diploma.backend.model.dto.StatisticEntryDTO;
+import com.diploma.backend.model.entities.DefectStatisticEntry;
 import com.diploma.backend.service.AnalyticService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -29,18 +31,23 @@ public class AnalyticController {
     private final ModelMapper mapper;
 
     @GetMapping("/user-statistics")
-    public List<StatisticEntryDTO> getAvailableStatuses(@RequestParam Integer projectId) {
-        log.debug("Get available statuses for project with id {}", projectId);
+    public List<StatisticEntryDTO> getUserStatistic(@RequestParam Integer projectId) {
+        log.debug("Get user statistic for project with id {}", projectId);
         return mapper.map(analyticService.getUserStatisticsByProjectId(projectId),
                 AppConstants.STATISTIC_LIST_TYPE);
     }
 
     @GetMapping("/ticket-type-statistics")
     public List<StatisticEntryDTO> getTicketTypeStatistics(@RequestParam Integer projectId) {
-        log.debug("Get available statuses for project with id {}", projectId);
-        analyticService.getTicketTypeStatisticsByProjectId(projectId);
+        log.debug("Get ticket type for project with id {}", projectId);
         return mapper.map(analyticService.getTicketTypeStatisticsByProjectId(projectId),
                 AppConstants.TICKET_TYPE_STATISTIC_LIST_TYPE);
+    }
+
+    @GetMapping("/defects-statistics")
+    public Map<String, DefectStatisticEntry> getDefectStatistic(@RequestParam Integer projectId) {
+        log.debug("Get defects statistic for project with id {}", projectId);
+        return analyticService.getDefectsStatisticByProjectId(projectId);
     }
 
 }
