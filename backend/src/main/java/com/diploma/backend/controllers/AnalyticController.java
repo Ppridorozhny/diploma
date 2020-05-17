@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diploma.backend.AppConstants;
+import com.diploma.backend.model.dto.RunInfoDTO;
 import com.diploma.backend.model.dto.StatisticEntryDTO;
 import com.diploma.backend.model.entities.DefectStatisticEntry;
 import com.diploma.backend.service.AnalyticService;
@@ -48,6 +49,13 @@ public class AnalyticController {
     public Map<String, DefectStatisticEntry> getDefectStatistic(@RequestParam Integer projectId) {
         log.debug("Get defects statistic for project with id {}", projectId);
         return analyticService.getDefectsStatisticByProjectId(projectId);
+    }
+
+    @GetMapping("/run-info-statistics")
+    public List<RunInfoDTO> getRunInfoStatistic(@RequestParam String seriesId) {
+        log.debug("Get run ifo for series with id {}", seriesId);
+        return mapper.map(analyticService.getRunStatistic(seriesId),
+                AppConstants.RUN_INFO_STATISTIC_LIST_TYPE);
     }
 
 }

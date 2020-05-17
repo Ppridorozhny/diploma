@@ -10,6 +10,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import {first} from "rxjs/operators";
 import {DashboardService} from "../../service/dashboard.service";
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+import {RunInfo} from "../../model/run.info";
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,9 @@ export class DashboardComponent implements OnInit {
   lastUpdatedPie: Date = new Date();
   lastUpdatedRadar: Date = new Date();
   lastUpdatedLinear: Date = new Date();
+  lastUpdatedGantt: Date = new Date();
+  seriesId: string = 'ser1';
+  runs: RunInfo[];
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -150,7 +154,7 @@ export class DashboardComponent implements OnInit {
       this.getUserStatistics();
       this.getTicketTypeStatistics();
       this.getDefectsStatistic();
-      this.getGanttStatistic();
+      this.getRunData();
     }, () => {
       this.alertService.error('Unsuccessful parameters loading', 'Loading error');
     });
@@ -224,41 +228,44 @@ export class DashboardComponent implements OnInit {
       }, e => this.alertService.error('Cannot load defect`s statistic'));
   }
 
-  getGanttStatistic() {
-    const iterations = 400;
+  getRunData() {
+    this.dashboardService.getRunInfo(this.seriesId)
+      .pipe(first())
+      .subscribe(runs => {
+        this.runs = runs;
+        this.getGanttStatistic(runs);
+      });
+  }
 
-    // GENERATE SOME ROWS
+  getGanttStatistic(runs: RunInfo[]) {
 
-    const rows = {};
-    for (let i = 0; i < iterations; i++) {
-      const withParent = i > 0 && i % 2 === 0;
-      const id = i.toString();
+    let items = {};
+    let rows = {};
+
+    runs.forEach(run => {
+
+      const id = run.ticketId.toString();
       rows[id] = {
         id,
-        label: "Room " + i,
-        parentId: withParent ? (i - 1).toString() : undefined,
-        expanded: false
+        label: "Ticket " + run.ticketName,
+        parentId: run.parentId ? run.parentId.toString() : undefined,
+        expanded: true
       };
-    }
 
-    const dayLen = 24 * 60 * 60 * 1000;
-
-    // GENERATE SOME ROW -> ITEMS
-
-    const items = {};
-    for (let i = 0; i < iterations; i++) {
-      const id = i.toString();
-      const start = new Date().getTime();
       items[id] = {
         id,
-        label: "User id " + i,
+        label: "Run for " + run.ticketName,
         time: {
-          start: start + i * dayLen,
-          end: start + (i + 2) * dayLen
+          start: run.startedWhen ? new Date(run.startedWhen).getTime(): undefined,
+          end: run.completedWhen ? new Date(run.completedWhen).getTime() : undefined
         },
         rowId: id
       };
-    }
+    });
+
+    console.log("Final: ")
+    console.log(rows);
+    console.log(items);
 
     // LEFT SIDE LIST COLUMNS
 
@@ -298,30 +305,9 @@ export class DashboardComponent implements OnInit {
     };
   }
 
-  // GET THE GANTT INTERNAL STATE
-
-  onState(state) {
-    this.gstcState = state;
-
-    // YOU CAN SUBSCRIBE TO CHANGES
-
-    this.gstcState.subscribe("config.list.rows", rows => {
-      console.log("rows changed", rows);
-    });
-
-    this.gstcState.subscribe(
-      "config.chart.items.:id",
-      (bulk, eventInfo) => {
-        if (eventInfo.type === "update" && eventInfo.params.id) {
-          const itemId = eventInfo.params.id;
-          console.log(
-            `item ${itemId} changed`,
-            this.gstcState.get("config.chart.items." + itemId)
-          );
-        }
-      },
-      { bulk: true }
-    );
+  updateRuns() {
+    this.lastUpdatedGantt = new Date()
+    this.getRunData();
   }
 
 }
