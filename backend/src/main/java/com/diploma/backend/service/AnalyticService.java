@@ -18,4 +18,6 @@ public interface AnalyticService {
 
     List<RunInfo> getRunStatistic(String seriesId);
 
+    List<String> getSeries(Integer projectId);
+
 }

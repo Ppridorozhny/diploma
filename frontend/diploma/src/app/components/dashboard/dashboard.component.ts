@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Project} from "../../model/project";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {AlertService} from "../../service/alert.service";
 import {ProjectService} from "../../service/project.service";
@@ -26,7 +26,8 @@ export class DashboardComponent implements OnInit {
   lastUpdatedRadar: Date = new Date();
   lastUpdatedLinear: Date = new Date();
   lastUpdatedGantt: Date = new Date();
-  seriesId: string = 'ser1';
+  seriesId: string;
+  series: string[];
   runs: RunInfo[];
 
   public pieChartOptions: ChartOptions = {
@@ -71,11 +72,12 @@ export class DashboardComponent implements OnInit {
   public radarChartLabels: Label[] = [];
 
   public radarChartData: ChartDataSets[] = [
-    { data: [], label: 'Ticket types' }
+    {data: [], label: 'Ticket types'}
   ];
   public radarChartType: ChartType = 'radar';
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private spinner: NgxSpinnerService,
               private alertService: AlertService,
               private projectService: ProjectService,
@@ -84,8 +86,8 @@ export class DashboardComponent implements OnInit {
   }
 
   public lineChartData: ChartDataSets[] = [
-    { data: [], label: 'Opened' },
-    { data: [], label: 'Closed' }
+    {data: [], label: 'Opened'},
+    {data: [], label: 'Closed'}
   ];
   public lineChartLabels: Label[] = [];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
@@ -154,9 +156,16 @@ export class DashboardComponent implements OnInit {
       this.getUserStatistics();
       this.getTicketTypeStatistics();
       this.getDefectsStatistic();
-      this.getRunData();
     }, () => {
       this.alertService.error('Unsuccessful parameters loading', 'Loading error');
+    });
+
+    this.route.queryParams.subscribe(params => {
+      let ser = params['seriesId']
+      if (ser) {
+        this.seriesId = ser;
+      }
+      this.getSeries();
     });
 
     this.spinner.hide();
@@ -201,7 +210,7 @@ export class DashboardComponent implements OnInit {
   updateTicketTypeStatistic() {
     this.radarChartLabels = [];
     this.radarChartData = [
-      { data: [], label: 'Ticket types' }
+      {data: [], label: 'Ticket types'}
     ];
     this.getTicketTypeStatistics();
     this.lastUpdatedRadar = new Date();
@@ -220,12 +229,24 @@ export class DashboardComponent implements OnInit {
       .pipe(first())
       .subscribe(statistics => {
         let keys: string[] = Object.keys(statistics).sort();
-        keys.forEach( key => {
+        keys.forEach(key => {
           this.lineChartLabels.push(key);
           this.lineChartData[0].data.push(statistics[key].opened);
           this.lineChartData[1].data.push(statistics[key].closed);
         });
       }, e => this.alertService.error('Cannot load defect`s statistic'));
+  }
+
+  getSeries() {
+    this.dashboardService.getSeries(this.projectId)
+      .pipe(first())
+      .subscribe(series => {
+        this.series = series;
+        if (!this.seriesId) {
+          this.seriesId = series[0];
+        }
+        this.getRunData();
+      });
   }
 
   getRunData() {
@@ -256,7 +277,7 @@ export class DashboardComponent implements OnInit {
         id,
         label: "Run for " + run.ticketName,
         time: {
-          start: run.startedWhen ? new Date(run.startedWhen).getTime(): undefined,
+          start: run.startedWhen ? new Date(run.startedWhen).getTime() : undefined,
           end: run.completedWhen ? new Date(run.completedWhen).getTime() : undefined
         },
         rowId: id
@@ -301,13 +322,15 @@ export class DashboardComponent implements OnInit {
       },
       expander: {
         size: 1
-    }
+      }
     };
   }
 
   updateRuns() {
-    this.lastUpdatedGantt = new Date()
-    this.getRunData();
+    this.router.navigate(["/project/" + this.projectId + "/dashboard"],
+      {queryParams: {'seriesId': this.seriesId}}).then(() => {
+      window.location.reload();
+    });
   }
 
 }

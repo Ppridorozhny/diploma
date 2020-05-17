@@ -58,4 +58,10 @@ public class AnalyticController {
                 AppConstants.RUN_INFO_STATISTIC_LIST_TYPE);
     }
 
+    @GetMapping("/series")
+    public List<String> getSeries(@RequestParam Integer projectId) {
+        log.debug("Get series for project with id {}", projectId);
+        return analyticService.getSeries(projectId);
+    }
+
 }

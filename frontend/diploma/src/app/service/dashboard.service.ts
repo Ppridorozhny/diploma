@@ -29,4 +29,9 @@ export class DashboardService {
     return this.http.get<RunInfo[]>('api/analytic/run-info-statistics', {params: params});
   }
 
+  getSeries(projectId: number) {
+    let params = new HttpParams().set('projectId', projectId.toString())
+    return this.http.get<string[]>('api/analytic/series', {params: params});
+  }
+
 }

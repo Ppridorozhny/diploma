@@ -91,9 +91,15 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Ticket Runs
-                <i (click)="updateRuns()" class="refresh-icon"></i></h5>
+                <i (click)="updateRuns()"  class="refresh-icon"></i></h5>
+              <div class="form-group">
+                <label for="series">Series:</label>
+                <select [(ngModel)]="seriesId" class="form-control" id="series" name="series">
+                  <option *ngFor="let typ of series" value="{{typ}}">{{typ}}</option>
+                </select>
+              </div>
               <div class="sizeee">
-                <gstc [config]="config" (onState)="onState($event)"></gstc>
+                <gstc [config]="config"></gstc>
               </div>
             </div>
           </div>

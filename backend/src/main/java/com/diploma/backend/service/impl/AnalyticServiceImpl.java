@@ -112,4 +112,9 @@ public class AnalyticServiceImpl implements AnalyticService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<String> getSeries(Integer projectId) {
+        return runRepository.getSeriesByProjectId(projectId);
+    }
+
 }
