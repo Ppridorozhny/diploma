@@ -83,6 +83,25 @@
           </div>
         </div>
       </div>
+      <div class="row">
+
+
+        <div class="col-10 offset-2">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Open/Closed
+                defects statistic<i (click)="updateDefectsStatistic()" class="refresh-icon"></i></h5>
+              <div class="sizeee">
+                <gstc [config]="config" (onState)="onState($event)"></gstc>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            Last updated {{lastUpdatedLinear | date:'mediumTime'}}
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>

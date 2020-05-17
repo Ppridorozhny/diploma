@@ -136,6 +136,11 @@ export class DashboardComponent implements OnInit {
   public lineChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
 
+  title = "ng-gstc-test";
+
+  config: any;
+  gstcState: any;
+
   ngOnInit() {
     this.spinner.show();
 
@@ -145,6 +150,7 @@ export class DashboardComponent implements OnInit {
       this.getUserStatistics();
       this.getTicketTypeStatistics();
       this.getDefectsStatistic();
+      this.getGanttStatistic();
     }, () => {
       this.alertService.error('Unsuccessful parameters loading', 'Loading error');
     });
@@ -216,6 +222,106 @@ export class DashboardComponent implements OnInit {
           this.lineChartData[1].data.push(statistics[key].closed);
         });
       }, e => this.alertService.error('Cannot load defect`s statistic'));
+  }
+
+  getGanttStatistic() {
+    const iterations = 400;
+
+    // GENERATE SOME ROWS
+
+    const rows = {};
+    for (let i = 0; i < iterations; i++) {
+      const withParent = i > 0 && i % 2 === 0;
+      const id = i.toString();
+      rows[id] = {
+        id,
+        label: "Room " + i,
+        parentId: withParent ? (i - 1).toString() : undefined,
+        expanded: false
+      };
+    }
+
+    const dayLen = 24 * 60 * 60 * 1000;
+
+    // GENERATE SOME ROW -> ITEMS
+
+    const items = {};
+    for (let i = 0; i < iterations; i++) {
+      const id = i.toString();
+      const start = new Date().getTime();
+      items[id] = {
+        id,
+        label: "User id " + i,
+        time: {
+          start: start + i * dayLen,
+          end: start + (i + 2) * dayLen
+        },
+        rowId: id
+      };
+    }
+
+    // LEFT SIDE LIST COLUMNS
+
+    const columns = {
+      percent: 100,
+      resizer: {
+        inRealTime: true
+      },
+      fontSize: 10,
+      data: {
+        label: {
+          id: "label",
+          data: "label",
+          expander: true,
+          isHtml: true,
+          width: 150,
+          header: {
+            content: "Ticket"
+          }
+        }
+      }
+    };
+
+    this.config = {
+      height: 400,
+      headerHeight: 90,
+      list: {
+        rows,
+        columns
+      },
+      chart: {
+        items
+      },
+      expander: {
+        size: 1
+    }
+    };
+  }
+
+  // GET THE GANTT INTERNAL STATE
+
+  onState(state) {
+    this.gstcState = state;
+
+    // YOU CAN SUBSCRIBE TO CHANGES
+
+    this.gstcState.subscribe("config.list.rows", rows => {
+      console.log("rows changed", rows);
+    });
+
+    this.gstcState.subscribe(
+      "config.chart.items.:id",
+      (bulk, eventInfo) => {
+        if (eventInfo.type === "update" && eventInfo.params.id) {
+          const itemId = eventInfo.params.id;
+          console.log(
+            `item ${itemId} changed`,
+            this.gstcState.get("config.chart.items." + itemId)
+          );
+        }
+      },
+      { bulk: true }
+    );
   }
 
 }
