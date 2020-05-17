@@ -41,4 +41,6 @@ public class Run {
 
     private Date completedWhen;
 
+    private Long duration;
+
 }

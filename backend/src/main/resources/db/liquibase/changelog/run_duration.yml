@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - property:
+      name: run_duration.ver
+      value: 1
+  - changeSet:
+      id: init_schema_${db.version}.${run_duration.ver}
+      author: PPrydorozhnyi
+      validCheckSum: ANY
+      changes:
+        - sqlFile:
+            path: sql/run_duration.sql
+            relativeToChangelogFile: true
