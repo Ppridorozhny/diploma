@@ -11,3 +11,6 @@ databaseChangeLog:
   - include:
       file: changelog/run_duration.yml
       relativeToChangelogFile: true
+  - include:
+      file: changelog/remove_series_id.yml
+      relativeToChangelogFile: true

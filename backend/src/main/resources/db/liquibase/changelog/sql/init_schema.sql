@@ -79,7 +79,6 @@ CREATE TABLE pr_ticket
     epic_id       INTEGER,
     project_id    INTEGER,
     due_date      TIMESTAMP,
-    series_id     VARCHAR(255),
 
     created_by    VARCHAR(255),
     created_when  TIMESTAMP,

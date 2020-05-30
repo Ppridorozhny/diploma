@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - property:
+      name: series_id.ver
+      value: 1
+  - changeSet:
+      id: init_schema_${db.version}.${series_id.ver}
+      author: PPrydorozhnyi
+      validCheckSum: ANY
+      changes:
+        - sqlFile:
+            path: sql/series_id.sql
+            relativeToChangelogFile: true

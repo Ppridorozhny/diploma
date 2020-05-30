@@ -79,8 +79,6 @@ public class Ticket extends BaseAuditEntity {
     @NotNull
     private Date dueDate;
 
-    private String seriesId;
-
     private Integer assigneeId;
 
     private Integer reporterId;
