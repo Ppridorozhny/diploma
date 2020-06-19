@@ -39,7 +39,7 @@ import {TicketRelationsService} from "./service/ticket.relations.service";
 import {ChartsModule} from "ng2-charts";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {DashboardService} from "./service/dashboard.service";
-import {GSTCComponent} from "angular-gantt-schedule-timeline-calendar";
+import {AngularGanttScheduleTimelineCalendarModule} from 'angular-gantt-schedule-timeline-calendar';
 
 @NgModule({
   declarations: [
@@ -58,8 +58,7 @@ import {GSTCComponent} from "angular-gantt-schedule-timeline-calendar";
     ProfileComponent,
     SidebarComponent,
     ModalWindow,
-    DashboardComponent,
-    GSTCComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +73,8 @@ import {GSTCComponent} from "angular-gantt-schedule-timeline-calendar";
     Ng2TableModule,
     PaginationModule.forRoot(),
     FontAwesomeModule,
-    ChartsModule
+    ChartsModule,
+    AngularGanttScheduleTimelineCalendarModule
   ],
   providers: [
     AuthGuard,
