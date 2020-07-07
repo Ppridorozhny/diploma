@@ -1,0 +1,51 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3.1'
+
+#Define services of the solution
+services:
+
+  #PostgreSQL Database for the server side application
+  diploma-postgres:
+    image: "postgres:11.8-alpine"
+    container_name: diploma-postgres
+    #Volume mounted for database for the storage
+    volumes:
+      - diploma-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+    #Environment variable for DB name, user and password
+    environment:
+      - POSTGRES_DB=diploma
+      - POSTGRES_USER=auth
+      - POSTGRES_PASSWORD=auth
+
+  #Back-end Spring Boot Application
+  diploma-app:
+    #The docker file in diploma-app build the jar and provides the docker image with the following name.
+    build: ./backend
+    container_name: diploma-app
+
+    #Environment variables for Spring Boot Application.
+    environment:
+      - DB_SERVER=diploma-postgres
+      - POSTGRES_DB=diploma
+      - POSTGRES_USER=auth
+      - POSTGRES_PASSWORD=auth
+    ports:
+      - "8090:8090"
+    depends_on:
+      - diploma-postgres
+
+#  #Fron-end part of the solution
+#  diploma-ui:
+#    build: ./frontend
+#    container_name: diploma-ui
+#    ports:
+#      - 4200:80
+#    links:
+#      - diploma-app
+
+#Volumes for DB data
+volumes:
+  diploma-data:

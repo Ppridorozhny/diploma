@@ -116,12 +116,6 @@
             <artifactId>modelmapper</artifactId>
             <version>${model.mapper.version}</version>
         </dependency>
-        <!--		<dependency>-->
-        <!--			<groupId>com.diploma</groupId>-->
-        <!--			<artifactId>frontend</artifactId>-->
-        <!--			<version>${project.version}</version>-->
-        <!--			<scope>runtime</scope>-->
-        <!--		</dependency>-->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
